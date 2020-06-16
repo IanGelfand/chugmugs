@@ -1,17 +1,17 @@
-Lunchcapades
-a lunch-trading app for adults
-*This document describes our team social contract for this project*
-Reference Establishing Norms
+
+
 Roles
-● Taskmaster
-● Gitmaster
-● Testmaster
+● Taskmaster- assign new roles, assign tasks, manage project board/to-do
+● Gitmaster-  manages pull requests at EOD
+● Testmaster- encourage writing of tests, write some of their own to fill in gaps
+
 Daily process
+Standups: 10:45am, 6pm
+Mid-day check-in 2:30pm
 ● Morning standup started by yesterday's Taskmaster
 ○ New roles assigned (by yesterday’s Taskmaster)
 ○ Yesterday? Today? Obstacles? (by today’s Taskmaster)
 ● Record issues that are non-blocking and discuss at daily stand-ups
-● Bring up any blocking issues after trying to debug for at least 30 min
 ● At 2:30pm quickly have a re-group meeting where you check-in with blockers, status updates and
 plan for EOD merge
 ● 15 min before the end of the day re-group for final stand-up, code push, review
@@ -19,8 +19,10 @@ Team expectations
 ● Each of us reserves the rights to our nights and weekends, and we have all been
 straightforward about when and how we can commit to working on the project(if you plan on working more on the project just 
 let the team know before the end of day/weekday)
-● If you have a blocking issue, slack before interrupting another’s train of coding-thought
+● Bring up any blocking issues after trying to debug for at least 30 min
+If you have a blocking issue, slack before interrupting another’s train of coding-thought
 ● If you are having any issues with your work write the issue in the slack channel as to not interupt anyones work
+● Inform team about any deviations from plan or adjustments to your tasks
 ● We will assign tasks vertically (instead of horizontally, not to assign tasks that are unrelated to previous tasks)
 ● Don’t interrupt - raise your hand
 ● Share the mic
