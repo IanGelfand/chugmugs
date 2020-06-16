@@ -7,7 +7,7 @@ const GET_ALL_MUGS = 'GET_ALL_MUGS'
 const getAllMugs = mugs => ({type: GET_ALL_MUGS, mugs})
 
 // Thunks
-export const allMugsThunk = () => {
+export const getAllMugsThunk = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/mugs')
