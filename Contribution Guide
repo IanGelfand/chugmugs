@@ -2,7 +2,7 @@ The contribution process is...
 
 Make an issue (or multiple issues)
 Make a PR that references that issue
-Get it code reviewed by someone on the team, address any comments
+Get it code reviewed by someone on the team (gitmaster), address any comments
 Merge into master (with merge commit)
 
 Code style guide
