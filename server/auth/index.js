@@ -38,8 +38,20 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+const userNotFound = next => {
+  const error = new Error('Not found')
+  error.status = 404
+  next(error)
+}
+
+router.get('/me', (req, res, next) => {
+  if (!req.session.userId) {
+    userNotFound(next)
+  } else {
+    User.findById(req.session.userId)
+      .then(user => (user ? res.json(user) : userNotFound(next)))
+      .catch(next)
+  }
 })
 
 router.use('/google', require('./google'))
