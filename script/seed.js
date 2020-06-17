@@ -21,6 +21,22 @@ async function seed() {
     })
   )
 
+  // Dummy data for users with mugs in their cart --->
+
+  const jake = users[0]
+  const dave = users[1]
+  const shia = users[2]
+
+  const debuggingMug = mugs[0]
+  const pythonMug = mugs[1]
+  const coderMug = mugs[2]
+
+  await jake.addMugs([debuggingMug, pythonMug])
+  await dave.addMugs(coderMug)
+  await shia.addMugs([coderMug, debuggingMug])
+
+  // <------
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${mugs.length} mugs`)
   console.log(`seeded successfully`)
