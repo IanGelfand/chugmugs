@@ -67,6 +67,22 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
+  //lists the user mugs that are in their cart
+  //db temp place holder for mugs
+  // app.post('/api/mugs', (req, res) => {
+  //   let products = [], id = null;
+  //   let cart = JSON.parse(req.body.cart);
+  //   if (!cart) return res.json(products)
+  //   for (let i = 0; i < db.products.length; i++) {
+  //     id = db.products[i].id.toString();
+  //     if (cart.hasOwnProperty(id)) {
+  //       db.products[i].qty = cart[id]
+  //       products.push(db.products[i]);
+  //     }
+  //   }
+  //   return res.json(products);
+  // });
+
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
 
