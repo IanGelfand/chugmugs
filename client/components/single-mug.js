@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {getMug, addMug} from '../store'
+import {oneMugThunk} from '../store/oneMug'
+import {addToCartThunk} from '../store/userCart'
 
 class SingleMug extends Component {
   componentDidMount() {
@@ -23,11 +24,13 @@ class SingleMug extends Component {
             <img src={mug.imageUrl} />
             <h4>Capacity: {mug.capacity}</h4>
             <h4>Material: {mug.material}</h4>
-            <h4>Color: {mug.color}</h4>
             <h4>Price: ${mug.price}</h4>
+            <p>{mug.description}</p>
           </div>
           <div>
-            <button onClick={() => addMugToCart(mug.id)}>Add To Cart</button>
+            <button type="button" onClick={() => addMugToCart(mug.id)}>
+              Add To Cart
+            </button>
           </div>
         </React.Fragment>
       )
@@ -44,10 +47,10 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadMug(id) {
-      dispatch(getMug(id))
+      dispatch(oneMugThunk(id))
     },
     addMugToCart(mugId) {
-      dispatch(addMug(mugId))
+      dispatch(addToCartThunk(mugId))
     }
   }
 }

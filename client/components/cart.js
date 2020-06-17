@@ -2,7 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
-import {updateMug, removeMug, checkout} from '../store'
+import {
+  updateQuantityThunk,
+  removeFromCartThunk,
+  checkout
+} from '../store/userCart'
 
 class Cart extends Component {
   render() {
@@ -13,12 +17,12 @@ class Cart extends Component {
         <h3>Your Shopping Cart</h3>
         <div id="cart-list">
           {cart.map(mug => (
-            <React.Fragment>
-              <Mug key={mug.id} {...mug} />
+            <React.Fragment key={mug.id}>
+              <Mug {...mug} />
               <label htmlFor="quantity">Quantity:</label>
               {/* implement quantity update element here */}
               <div>
-                <button onClick={() => removeMugFromCart(mug.id)}>
+                <button type="button" onClick={() => removeMugFromCart(mug.id)}>
                   Remove Mug From Cart
                 </button>
               </div>
@@ -26,7 +30,9 @@ class Cart extends Component {
           ))}
         </div>
         <div>
-          <button onClick={checkoutMugs}>Checkout</button>
+          <button type="button" onClick={checkoutMugs}>
+            Checkout
+          </button>
         </div>
       </React.Fragment>
     )
@@ -42,10 +48,10 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     updateQuantity(mugId) {
-      dispatch(updateMug(mugId))
+      dispatch(updateQuantityThunk(mugId))
     },
     removeMugFromCart(mugId) {
-      dispatch(removeMug(mugId))
+      dispatch(removeFromCartThunk(mugId))
     },
     checkoutMugs() {
       dispatch(checkout())

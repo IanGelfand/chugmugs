@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
-import {getMugs} from '../store'
+import {getAllMugsThunk} from '../store/allMugs'
 
 class AllMugs extends Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadMugs() {
-      dispatch(getMugs())
+      dispatch(getAllMugsThunk())
     }
   }
 }

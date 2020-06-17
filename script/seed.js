@@ -31,9 +31,9 @@ async function seed() {
   const pythonMug = mugs[1]
   const coderMug = mugs[2]
 
-  await jake.addMugs([debuggingMug, pythonMug])
-  await dave.addMugs(coderMug)
-  await shia.addMugs([coderMug, debuggingMug])
+  await jake.addCart([debuggingMug, pythonMug])
+  await dave.addCart(coderMug)
+  await shia.addCart([coderMug, debuggingMug])
 
   // <------
 

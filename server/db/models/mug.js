@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Mug = db.define('mug', {
-  name: {
+  title: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
@@ -31,7 +31,7 @@ const Mug = db.define('mug', {
     allowNull: true
   },
   imgUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: 'https://bit.ly/2UK0HRl'
   }
 })
