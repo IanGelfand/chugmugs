@@ -22,10 +22,6 @@ const Mug = db.define('mug', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  quantity: {
-    type: Sequelize.INTEGER,
-    allowNull: true
-  },
   material: {
     type: Sequelize.STRING,
     allowNull: true
