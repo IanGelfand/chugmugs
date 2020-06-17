@@ -20,7 +20,15 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
-  profilePic: {
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  imgUrl: {
     type: Sequelize.STRING,
     defaultValue: 'https://bit.ly/37Lab4d'
   },

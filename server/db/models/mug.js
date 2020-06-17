@@ -12,24 +12,25 @@ const Mug = db.define('mug', {
   },
   color: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   price: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  volume: {
+  capacity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   quantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: true
   },
   material: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
-  imageUrl: {
+  imgUrl: {
     type: Sequelize.STRING,
     defaultValue: 'https://bit.ly/2UK0HRl'
   }
