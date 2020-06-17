@@ -29,7 +29,7 @@ const User = db.define('user', {
     allowNull: true
   },
   imgUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     defaultValue: 'https://bit.ly/37Lab4d'
   },
   salt: {
