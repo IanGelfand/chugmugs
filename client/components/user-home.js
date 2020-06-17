@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Cart} from '.'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
-
+export const UserHome = ({user}) => {
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {user.email}</h3>
+      <img src={user.imgUrl} />
+      <Cart />
     </div>
   )
 }
@@ -20,7 +21,7 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    user: state.user
   }
 }
 
@@ -30,5 +31,5 @@ export default connect(mapState)(UserHome)
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  user: PropTypes.object.isRequired
 }
