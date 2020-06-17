@@ -1,5 +1,28 @@
 import axios from 'axios'
 
+// const cartItem = {
+//   cartItemId: "123",
+//   qty: 3,
+//   subtotal: 30.00,
+
+//   product: {
+//     name: "MUG 1",
+//     color: "Blue",
+//     material: "Metal",
+//     price: 10.00
+//   }
+// }
+
+// cart: {
+//   cartId,
+//   total,
+//   items: [
+
+//   ]
+// }
+
+/// Receive allCart every time!!!
+
 const initialState = []
 
 // ACTIONS
