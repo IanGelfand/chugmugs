@@ -3,7 +3,7 @@ const {User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  if (isAdmin) {
+  if (User.isAdmin) {
     try {
       const users = await User.findAll({
         attributes: ['id', 'email']
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.put('/', async (req, res, next) => {
-  if (isAdmin) {
+  if (User.isAdmin) {
     const userId = req.body.id
     try {
       await userId.update(req.body, {where: {id: userId}})
@@ -32,7 +32,7 @@ router.put('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-  if (isAdmin) {
+  if (User.isAdmin) {
     try {
       const user = await User.findOne({
         attributes: ['id', 'email'],

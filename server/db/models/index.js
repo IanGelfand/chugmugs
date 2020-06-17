@@ -1,8 +1,13 @@
 const User = require('./user')
 const Mug = require('./mug')
+const Order = require('./order')
+const MugOrder = require('./mugOrder')
 
-User.belongsToMany(Mug, {as: 'cart', through: 'UserMug', foreignKey: 'userId'})
-Mug.belongsToMany(User, {as: 'users', through: 'UserMug', foreignKey: 'mugId'})
+Order.belongsTo(User)
+User.hasMany(Order)
+
+Order.belongsToMany(Mug, {through: 'MugOrder'})
+Mug.belongsToMany(Order, {through: 'Order'})
 
 module.exports = {
   User,
