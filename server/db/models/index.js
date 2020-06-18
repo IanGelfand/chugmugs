@@ -12,5 +12,6 @@ Mug.belongsToMany(Order, {through: 'Order'})
 module.exports = {
   User,
   Mug,
+  MugOrder,
   Order
 }
