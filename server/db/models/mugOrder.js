@@ -4,7 +4,8 @@ const db = require('../db')
 const MugOrder = db.define('mugOrder', {
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 1
   },
   price: {
     type: Sequelize.INTEGER,

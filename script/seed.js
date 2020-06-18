@@ -23,17 +23,17 @@ async function seed() {
 
   // Dummy data for users with mugs in their cart --->
 
-  const jake = users[0]
-  const dave = users[1]
-  const shia = users[2]
+  // const jake = users[0]
+  // const dave = users[1]
+  // const shia = users[2]
 
-  const debuggingMug = mugs[0]
-  const pythonMug = mugs[1]
-  const coderMug = mugs[2]
+  // const debuggingMug = mugs[0]
+  // const pythonMug = mugs[1]
+  // const coderMug = mugs[2]
 
-  await jake.addCart([debuggingMug, pythonMug])
-  await dave.addCart(coderMug)
-  await shia.addCart([coderMug, debuggingMug])
+  // await jake.addCart([debuggingMug, pythonMug])
+  // await dave.addCart(coderMug)
+  // await shia.addCart([coderMug, debuggingMug])
 
   // <------
 
