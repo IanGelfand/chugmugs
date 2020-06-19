@@ -7,12 +7,11 @@ import {Cart} from '.'
  * COMPONENT
  */
 export const UserHome = ({user}) => {
-  console.log('THIS IS MY USER:', user)
   return (
     <div>
       <h3>Welcome, {user.email}</h3>
       <img src={user.imgUrl} />
-      {/* <Cart /> */}
+      <Cart />
     </div>
   )
 }

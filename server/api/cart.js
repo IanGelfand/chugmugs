@@ -1,21 +1,13 @@
 const router = require('express').Router()
-const {User, Order, Mug, MugOrder} = require('../db/models')
+const {Mug} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    console.log('req user', req.user.cartId)
-    console.log('fetching req user cart')
-    // const user = await User.findOne({where:{email: 'ian@email.com'}});
-    // console.log('not req user', user.cartId);
-    //     const cart = await user.getCart();
-    //     res.json(cart);
     if (req.user) {
-      console.log('fetching req user cart')
       const cart = await req.user.getCart()
       res.json(cart)
     } else {
-      console.log('fetching session cart')
       res.json(req.session.cart || [])
     }
   } catch (error) {
@@ -23,30 +15,27 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/add', async (req, res, next) => {
+router.put('/add', async (req, res, next) => {
   try {
-    console.log('req user', req.user)
     const mug = await Mug.findByPk(req.body.mugId)
-    console.log('created mug to add', mug)
-    // if (req.user) {
-    const user = await User.findOne({where: {email: 'ian@email.com'}})
+    const cartMug = {
+      id: mug.id,
+      title: mug.title,
+      price: mug.price,
+      capacity: mug.capacity,
+      material: mug.material,
+      imgUrl: mug.imgUrl,
+      quantity: 1
+    }
 
-    console.log('adding mug to user cart', user)
-    await user.addMugToCart(mug)
-    console.log('added mug to user cart', user)
+    if (req.user) await req.user.addMugToCart(mug)
+    else {
+      if (!req.session.cart) req.session.cart = []
 
-    //    res.json(addedItem);
-    // } else {
-    //     console.log('adding mug to guest session cart');
-    //     if (!req.session.cart) {
+      req.session.cart.push(cartMug)
+    }
 
-    //         req.session.cart = [];
-    //         console.log('creating session cart', req.session.cart);
-    //     }
-
-    //     req.session.cart.push(mug);
-    //     console.log('added to session cart', req.session.cart);
-    // };
+    res.json(cartMug)
   } catch (error) {
     next(error)
   }

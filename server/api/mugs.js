@@ -14,9 +14,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const singleMug = await Mug.findByPk(req.params.id)
-    singleMug
-      ? res.json(singleMug)
-      : res.status(404).send('Sorry, this mug is not in our inventory :(')
+    if (singleMug) res.json(singleMug)
+    else res.status(404).send('Sorry, this mug is not in our inventory :(')
   } catch (err) {
     next(err)
   }
