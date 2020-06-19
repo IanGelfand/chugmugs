@@ -1,8 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
-const Order = require('./order')
-require('../models/index')
 const db = require('../db')
+const Order = require('./order')
 
 const User = db.define('user', {
   isAdmin: {
@@ -53,44 +52,39 @@ const User = db.define('user', {
 
 module.exports = User
 
-User.prototype.getCart = async function() {
-  if (!this.cartId) {
-    return []
-  }
-  const cart = await Order.findByPk(this.cartId)
-  const cartMugs = await cart.getMugs()
-  console.log('getCart method:', cartMugs)
-  for (let i = 0; i < cartMugs.length; i++) {
-    cartMugs[i].quantity = 5
-    //cartMugs[i].dataValues.mugOrder.dataValues.quantity;
-  }
-  return cartMugs
-}
-
-User.prototype.addMugToCart = async function(mug) {
-  if (!this.cartId) {
-    console.log('creating user cart')
-    let cart = await Order.create()
-    console.log('created new cart', cart, cart.id)
-    cart.addMug(mug)
-    console.log('added mug cart', cart)
-    cart.setUser(this)
-    console.log('set cart to user', cart, this)
-    this.update({cartId: cart.id})
-    console.log('set cartId', this.cartId)
-  } else {
-    let cart = await Order.findByPk(this.cartId)
-    console.log('fetched user cart', cart)
-    cart.addMug(mug)
-    console.log('added mug to existing user cart', cart)
-  }
-}
-
 /**
  * instanceMethods
  */
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+}
+
+User.prototype.getCart = async function() {
+  if (!this.cartId) return []
+
+  const cart = await Order.findByPk(this.cartId)
+  const cartMugs = await cart.getMugs()
+
+  return cartMugs.map(mug => ({
+    id: mug.dataValues.id,
+    title: mug.dataValues.title,
+    price: mug.dataValues.price,
+    capacity: mug.dataValues.capacity,
+    material: mug.dataValues.material,
+    imgUrl: mug.dataValues.imgUrl,
+    quantity: mug.dataValues.mugOrder.dataValues.quantity
+  }))
+}
+
+User.prototype.addMugToCart = async function(mug) {
+  if (!this.cartId) {
+    let cart = await Order.create({userId: this.id})
+    cart.addMug(mug, {through: {price: mug.price}})
+    this.update({cartId: cart.id})
+  } else {
+    let cart = await Order.findByPk(this.cartId)
+    cart.addMug(mug, {through: {price: mug.price}})
+  }
 }
 
 /**

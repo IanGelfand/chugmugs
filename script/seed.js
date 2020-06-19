@@ -4,7 +4,7 @@ const db = require('../server/db')
 const {User, Mug, MugOrder, Order} = require('../server/db/models')
 const mugsSeedData = require('./mugs-seed')
 const usersSeedData = require('./users-seed')
-const orderSeedData = require('./orders-seed')
+// const orderSeedData = require('./orders-seed')
 // const orderSeedData = require('./orders-seed')
 
 async function seed() {
@@ -22,11 +22,11 @@ async function seed() {
       return Mug.create(mug)
     })
   )
-  const orders = await Promise.all(
-    orderSeedData.map(order => {
-      return Order.create(order)
-    })
-  )
+  // const orders = await Promise.all(
+  //   orderSeedData.map(order => {
+  //     return Order.create(order)
+  //   })
+  // )
 
   // Dummy data for users with mugs in their cart --->
 
@@ -46,7 +46,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${mugs.length} mugs`)
-  console.log(`seeded ${orders.length} orders`)
+  // console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 

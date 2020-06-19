@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome, Cart, AllMugs, SingleMug} from './components'
-import {me} from './store'
+import {me} from './store/user'
 
 /**
  * COMPONENT
@@ -21,8 +21,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/mugs" component={AllMugs} />
         <Route path="/mugs/:mugId" component={SingleMug} />
+        <Route path="/mugs" component={AllMugs} />
         <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>

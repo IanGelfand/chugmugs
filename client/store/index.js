@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import userReducer from './user'
 import oneMugReducer from './oneMug'
 import allMugsReducer from './allMugs'
+import cartReducer from './userCart'
 
 const reducer = combineReducers({
   user: userReducer,
   oneMug: oneMugReducer,
-  allMugs: allMugsReducer
+  allMugs: allMugsReducer,
+  cart: cartReducer
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -17,4 +19,4 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware)
 
 export default store
-export * from './user'
+// export * from './user'

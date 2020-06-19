@@ -13,8 +13,11 @@ const getOneMug = oneMug => ({type: GET_ONE_MUG, oneMug})
 export const oneMugThunk = id => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/mugs${id}`)
-      dispatch(getOneMug(data))
+      if (!id) dispatch(getOneMug({}))
+      else {
+        const {data} = await axios.get(`/api/mugs/${id}`)
+        dispatch(getOneMug(data))
+      }
     } catch (error) {
       console.log('Ops! we have a trouble finding that Mug', error)
     }

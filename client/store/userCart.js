@@ -55,9 +55,9 @@ export const getCartItemsThunk = () => async dispatch => {
   }
 }
 
-export const addToCartThunk = item => async dispatch => {
+export const addToCartThunk = id => async dispatch => {
   try {
-    const res = await axios.post('./api/cart', item)
+    const res = await axios.put('./api/cart/add', {mugId: id})
     dispatch(addItem(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)

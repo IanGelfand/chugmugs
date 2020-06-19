@@ -1,10 +1,10 @@
 import React from 'react'
 import history from '../history'
 
-const Mug = ({id, title, price, imageUrl}) => (
+const Mug = ({id, title, price, imgUrl}) => (
   <div className="list-mug">
     <h4 onClick={() => history.push(`/mugs/${id}`)}>{title}</h4>
-    <img src={imageUrl} onClick={() => history.push(`/mugs/${id}`)} />
+    <img src={imgUrl} onClick={() => history.push(`/mugs/${id}`)} />
     <h5>Price: ${price}</h5>
   </div>
 )
