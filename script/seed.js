@@ -5,6 +5,7 @@ const {User, Mug, MugOrder, Order} = require('../server/db/models')
 const mugsSeedData = require('./mugs-seed')
 const usersSeedData = require('./users-seed')
 const orderSeedData = require('./orders-seed')
+const faker = require('faker')
 // const orderSeedData = require('./orders-seed')
 
 async function seed() {
@@ -27,22 +28,22 @@ async function seed() {
       return Order.create(order)
     })
   )
+  // 100 dummy mugs that aren't actually mugs ---->
 
-  // Dummy data for users with mugs in their cart --->
-
-  // const jake = users[0]
-  // const dave = users[1]
-  // const shia = users[2]
-
-  // const debuggingMug = mugs[0]
-  // const pythonMug = mugs[1]
-  // const coderMug = mugs[2]
-
-  // await jake.addCart([debuggingMug, pythonMug])
-  // await dave.addCart(coderMug)
-  // await shia.addCart([coderMug, debuggingMug])
-
-  // <------
+  for (let i = 0; i < 100; i++) {
+    const fakeMug = {
+      title: faker.commerce.product(),
+      description: faker.commerce.productAdjective(),
+      price: faker.random.number(),
+      color: faker.commerce.color(),
+      material: faker.commerce.productMaterial(),
+      imgUrl: faker.image.imageUrl(),
+      stock: faker.random.number(),
+      capacity: faker.random.number()
+    }
+    await Mug.create(fakeMug)
+  }
+  // <--------------------------------------
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${mugs.length} mugs`)
