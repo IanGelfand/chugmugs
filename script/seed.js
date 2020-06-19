@@ -27,7 +27,6 @@ async function seed() {
       return Order.create(order)
     })
   )
-  // 100 dummy mugs that aren't actually mugs ---->
 
   for (let i = 0; i < 100; i++) {
     const fakeMug = {

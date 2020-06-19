@@ -16,7 +16,7 @@ class AllMugs extends Component {
       <h1>No Current Mug Listings</h1>
     ) : (
       <React.Fragment>
-        <h3>What Mug Will You Chug?</h3>
+        <h3>Which Mug Will You Chug?</h3>
         <div id="mug-list">
           {mugs.map(mug => <Mug key={mug.id} {...mug} />)}
         </div>
@@ -27,7 +27,7 @@ class AllMugs extends Component {
 
 const mapState = state => {
   return {
-    mugs: state.mugs
+    mugs: state.allMugs
   }
 }
 

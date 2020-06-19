@@ -21,7 +21,7 @@ class SingleMug extends Component {
         <React.Fragment>
           <div className="single-mug">
             <h2>{mug.title}</h2>
-            <img src={mug.imageUrl} />
+            <img src={mug.imgUrl} />
             <h4>Capacity: {mug.capacity}</h4>
             <h4>Material: {mug.material}</h4>
             <h4>Price: ${mug.price}</h4>
@@ -40,7 +40,7 @@ class SingleMug extends Component {
 
 const mapState = state => {
   return {
-    mug: state.selectedMug
+    mug: state.oneMug
   }
 }
 
