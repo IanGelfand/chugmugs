@@ -6,7 +6,6 @@ const mugsSeedData = require('./mugs-seed')
 const usersSeedData = require('./users-seed')
 const orderSeedData = require('./orders-seed')
 const faker = require('faker')
-// const orderSeedData = require('./orders-seed')
 
 async function seed() {
   await db.sync({force: true})
