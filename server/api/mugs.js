@@ -1,5 +1,7 @@
 const router = require('express').Router()
-const {Mug, User} = require('../db/models')
+const {Mug} = require('../db/models')
+const {adminsOnly} = require('../accessChecks')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -21,21 +23,16 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
-  if (User.isAdmin) {
-    try {
-      const singleMug = await Mug.create(req.body)
-      res.json(singleMug)
-    } catch (err) {
-      next(err)
-    }
-  } else {
-    res.send('Sorry, you are not authorized to list mugs :(')
+router.post('/', adminsOnly, async (req, res, next) => {
+  try {
+    const singleMug = await Mug.create(req.body)
+    res.json(singleMug)
+  } catch (err) {
+    next(err)
   }
 })
 
-// Not sure whether I need to add the
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', adminsOnly, async (req, res, next) => {
   try {
     const singleMug = await Mug.findByPk(req.params.id)
     await singleMug.update(req.body)
@@ -45,16 +42,12 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
-  if (User.isAdmin) {
-    try {
-      const singleMug = await Mug.findByPk(req.params.id)
-      await singleMug.destroy()
-      res.sendStatus(204)
-    } catch (err) {
-      next(err)
-    }
-  } else {
-    res.send('Sorry, you are not authorized to remove mugs :(')
+router.delete('/:id', adminsOnly, async (req, res, next) => {
+  try {
+    const singleMug = await Mug.findByPk(req.params.id)
+    await singleMug.destroy()
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
   }
 })
