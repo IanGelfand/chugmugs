@@ -16,16 +16,17 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.put('/add/:id', async (req, res, next) => {
+router.put('/add', async (req, res, next) => {
   try {
-    const mug = await Mug.findByPk(req.params.id)
+    const mug = await Mug.findByPk(req.body.mugId)
     console.log('mug to add', mug)
     const cartMug = {
       id: mug.dataValues.id,
       title: mug.dataValues.title,
+      color: mug.dataValues.color,
       price: mug.dataValues.price,
       capacity: mug.dataValues.capacity,
-      material: mug.dataValues.material,
+      description: mug.dataValues.description,
       imgUrl: mug.dataValues.imgUrl,
       quantity: 1
     }

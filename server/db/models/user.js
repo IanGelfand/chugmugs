@@ -68,9 +68,10 @@ User.prototype.getCart = async function() {
   return cartMugs.map(mug => ({
     id: mug.dataValues.id,
     title: mug.dataValues.title,
+    color: mug.dataValues.color,
     price: mug.dataValues.price,
     capacity: mug.dataValues.capacity,
-    material: mug.dataValues.material,
+    description: mug.dataValues.description,
     imgUrl: mug.dataValues.imgUrl,
     quantity: mug.dataValues.mugOrder.dataValues.quantity
   }))

@@ -49,7 +49,7 @@ const updateItemQuantity = updatedItem => ({
 // THUNKS
 export const getCartItemsThunk = () => async dispatch => {
   try {
-    const res = await axios.get('./api/cart')
+    const res = await axios.get('/api/cart')
     dispatch(getAllItems(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
@@ -59,7 +59,7 @@ export const getCartItemsThunk = () => async dispatch => {
 export const addToCartThunk = id => async dispatch => {
   try {
     console.log('mug id sent to thunk', id)
-    const res = await axios.put(`./api/cart/add/${id}`)
+    const res = await axios.put('/api/cart/add', {mugId: id})
     console.log('added mug sent back to thunk', res)
     dispatch(addItem(res.data))
   } catch (error) {
@@ -69,7 +69,7 @@ export const addToCartThunk = id => async dispatch => {
 
 export const removeFromCartThunk = itemId => async dispatch => {
   try {
-    await axios.delete(`./api/cart${itemId}`)
+    await axios.delete(`/api/cart${itemId}`)
     dispatch(removeItem(itemId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
@@ -78,7 +78,7 @@ export const removeFromCartThunk = itemId => async dispatch => {
 
 export const updateQuantityThunk = updatedItem => async dispatch => {
   try {
-    const res = await axios.patch(`./api/cart${updatedItem.id}`, updatedItem)
+    const res = await axios.patch(`/api/cart${updatedItem.id}`, updatedItem)
     dispatch(updateItemQuantity(res.data))
   } catch (error) {
     console.log("Thunk error, can't Update item in the cart", error)

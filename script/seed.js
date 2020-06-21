@@ -61,7 +61,6 @@ async function seed() {
       description: faker.commerce.productAdjective(),
       price: faker.random.number(),
       color: faker.commerce.color(),
-      material: faker.commerce.productMaterial(),
       imgUrl: faker.image.imageUrl(),
       stock: faker.random.number(),
       capacity: faker.random.number()

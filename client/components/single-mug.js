@@ -22,10 +22,10 @@ class SingleMug extends Component {
           <div className="single-mug">
             <h2>{mug.title}</h2>
             <img src={mug.imgUrl} />
+            <h4>Color: {mug.color}</h4>
             <h4>Capacity: {mug.capacity}</h4>
-            <h4>Material: {mug.material}</h4>
             <h4>Price: ${mug.price}</h4>
-            <p>{mug.description}</p>
+            <p>Details: {mug.description}</p>
           </div>
           <div>
             <button type="button" onClick={() => addMugToCart(mug.id)}>
