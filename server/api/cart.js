@@ -7,33 +7,36 @@ router.get('/', async (req, res, next) => {
     if (req.user) {
       const cart = await req.user.getCart()
       res.json(cart)
-    } else {
-      res.json(req.session.cart || [])
     }
+    // else {
+    //   res.json(req.session.cart || [])
+    // }
   } catch (error) {
     next(error)
   }
 })
 
-router.put('/add', async (req, res, next) => {
+router.put('/add/:id', async (req, res, next) => {
   try {
-    const mug = await Mug.findByPk(req.body.mugId)
+    const mug = await Mug.findByPk(req.params.id)
+    console.log('mug to add', mug)
     const cartMug = {
-      id: mug.id,
-      title: mug.title,
-      price: mug.price,
-      capacity: mug.capacity,
-      material: mug.material,
-      imgUrl: mug.imgUrl,
+      id: mug.dataValues.id,
+      title: mug.dataValues.title,
+      price: mug.dataValues.price,
+      capacity: mug.dataValues.capacity,
+      material: mug.dataValues.material,
+      imgUrl: mug.dataValues.imgUrl,
       quantity: 1
     }
+    console.log('formatted mug to add', cartMug)
 
     if (req.user) await req.user.addMugToCart(mug)
-    else {
-      if (!req.session.cart) req.session.cart = []
+    // else {
+    //   if (!req.session.cart) req.session.cart = []
 
-      req.session.cart.push(cartMug)
-    }
+    //   req.session.cart.push(cartMug)
+    // }
 
     res.json(cartMug)
   } catch (error) {

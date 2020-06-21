@@ -192,7 +192,8 @@ const mugsSeedData = [
     title: 'Pumpkin mug',
     description: `Perfect for your pumpkin spice lattes ;) !`,
     price: 2500,
-    imgUrl: 'imgs/hedgehog-ale-stone-1.jpg',
+    imgUrl:
+      'https://i.pinimg.com/564x/42/5f/81/425f81cedd906bbdccc31473b213a37a.jpg',
     stock: 4,
     capacity: 12
   },

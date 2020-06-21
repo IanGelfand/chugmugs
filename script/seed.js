@@ -1,10 +1,10 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Mug, MugOrder, Order} = require('../server/db/models')
+const {User, Mug, Order} = require('../server/db/models')
 const mugsSeedData = require('./mugs-seed')
 const usersSeedData = require('./users-seed')
-const orderSeedData = require('./orders-seed')
+// const orderSeedData = require('./orders-seed')
 const faker = require('faker')
 
 async function seed() {
@@ -22,11 +22,38 @@ async function seed() {
       return Mug.create(mug)
     })
   )
-  const orders = await Promise.all(
-    orderSeedData.map(order => {
-      return Order.create(order)
-    })
-  )
+  // const orders = await Promise.all(
+  //   orderSeedData.map((order) => {
+  //     return Order.create(order)
+  //   })
+  // )
+
+  for (let i = users.length - 2; i >= 0; i--) {
+    const cart = await Order.create({userId: users[i].id})
+    let cartMugs = {}
+
+    console.log('created cart for user', cart, users[i])
+
+    users[i].update({cartId: cart.id})
+
+    console.log('set cartId', users[i].cartId)
+
+    for (let j = 1; j < 4; j++) {
+      console.log('preparing to add a mug to cart')
+      let randMug = {}
+
+      while (!randMug.id || cartMugs[randMug.id]) {
+        cartMugs[randMug.id] = true
+        randMug = mugs[Math.floor(Math.random() * mugs.length)]
+
+        console.log('checking random mug for duplicate', randMug, cartMugs)
+      }
+
+      cart.addMug(randMug, {through: {price: randMug.price}})
+
+      console.log('added mug', cart)
+    }
+  }
 
   for (let i = 0; i < 100; i++) {
     const fakeMug = {
@@ -45,7 +72,7 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${mugs.length} mugs`)
-  console.log(`seeded ${orders.length} orders`)
+  // console.log(`seeded ${orders.length} orders`)
   console.log(`seeded successfully`)
 }
 
