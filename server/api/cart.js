@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 router.put('/add', async (req, res, next) => {
   try {
     const mug = await Mug.findByPk(req.body.mugId)
-    console.log('mug to add', mug)
+
     const cartMug = {
       id: mug.dataValues.id,
       title: mug.dataValues.title,
@@ -30,7 +30,6 @@ router.put('/add', async (req, res, next) => {
       imgUrl: mug.dataValues.imgUrl,
       quantity: 1
     }
-    console.log('formatted mug to add', cartMug)
 
     if (req.user) await req.user.addMugToCart(mug)
     // else {
