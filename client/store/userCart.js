@@ -67,7 +67,7 @@ export const addToCartThunk = id => async dispatch => {
 
 export const removeFromCartThunk = itemId => async dispatch => {
   try {
-    await axios.delete(`/api/cart${itemId}`)
+    await axios.delete(`/api/cart`, {mugId: itemId})
     dispatch(removeItem(itemId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
@@ -91,7 +91,7 @@ const cartReducer = (state = initialState, action) => {
     case ADD_ITEM:
       return [...state, action.item]
     case REMOVE_ITEM:
-      return state.filter(item => item.id !== action.id)
+      return state.filter(item => item.id !== action.itemId)
     case UPDATE_ITEM_QUANTITY:
       return state.map(item => {
         if (item.id === action.updatedItem.id) return action.updatedItem
