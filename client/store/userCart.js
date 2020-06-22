@@ -51,7 +51,7 @@ export const addToCartThunk = id => async dispatch => {
 export const updateQuantityThunk = (itemId, change) => async dispatch => {
   try {
     const res = await axios.put(`/api/cart/update/${itemId}`, change)
-    dispatch(updateItemQuantity(itemId, change))
+    dispatch(updateItemQuantity(itemId, change.change))
   } catch (error) {
     console.log("Thunk error, can't Update item in the cart", error)
   }

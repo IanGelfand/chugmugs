@@ -24,7 +24,7 @@ class SingleMug extends Component {
             <img src={mug.imgUrl} />
             <h4>Color: {mug.color}</h4>
             <h4>Capacity: {mug.capacity}</h4>
-            <h4>Price: ${mug.price}</h4>
+            <h4>Price: ${mug.price / 100}</h4>
             <p>Details: {mug.description}</p>
           </div>
           <div>
