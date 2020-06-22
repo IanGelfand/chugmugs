@@ -34,10 +34,8 @@ class Cart extends Component {
 
     let totalMugs = mugs.reduce((sum, mug) => sum + mug.quantity, 0)
 
-    let totalPrice = mugs.reduce(
-      (sum, mug) => sum + mug.price * mug.quantity,
-      0
-    )
+    let totalPrice =
+      mugs.reduce((sum, mug) => sum + mug.price * mug.quantity, 0) / 100
 
     return (
       <React.Fragment>
@@ -46,34 +44,6 @@ class Cart extends Component {
           <h1>Your Cart Is Empty</h1>
         ) : (
           <React.Fragment>
-            <div id="cart-list">
-              {mugs.map(mug => (
-                <React.Fragment key={mug.id}>
-                  <Mug {...mug} />
-                  <div>
-                    <span>Quantity: </span>
-                    <span
-                      onClick={() => {
-                        if (mug.quantity <= 1) removeMugFromCart(mug.id)
-                        else updateQuantity(mug.id, -1)
-                      }}
-                    >
-                      -
-                    </span>
-                    _{mug.quantity}_
-                    <span onClick={() => updateQuantity(mug.id, 1)}> + </span>
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={() => removeMugFromCart(mug.id)}
-                    >
-                      Remove Mug From Cart
-                    </button>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
             <div>
               <h5>Your Total is: ${totalPrice}</h5>
             </div>
@@ -87,6 +57,37 @@ class Cart extends Component {
               >
                 Checkout
               </button>
+            </div>
+            <div id="cart-list">
+              {mugs.map(mug => (
+                <React.Fragment key={mug.id}>
+                  <Mug {...mug} />
+                  <div>
+                    <span>Quantity: </span>
+                    <span
+                      onClick={() => {
+                        if (mug.quantity <= 1) removeMugFromCart(mug.id)
+                        else updateQuantity(mug.id, {change: -1})
+                      }}
+                    >
+                      -
+                    </span>
+                    _{mug.quantity}_
+                    <span onClick={() => updateQuantity(mug.id, {change: 1})}>
+                      {' '}
+                      +{' '}
+                    </span>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => removeMugFromCart(mug.id)}
+                    >
+                      Remove Mug From Cart
+                    </button>
+                  </div>
+                </React.Fragment>
+              ))}
             </div>
           </React.Fragment>
         )}
