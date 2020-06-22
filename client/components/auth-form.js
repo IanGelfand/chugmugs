@@ -27,15 +27,7 @@ const AuthForm = props => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
-        {error &&
-          error.response && (
-            <div>
-              {' '}
-              {error.response.status === 400
-                ? 'Password required'
-                : 'admin only'}{' '}
-            </div>
-          )}
+        {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
     </div>
