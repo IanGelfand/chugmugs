@@ -3,11 +3,11 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
 import {
-  getCartItemsThunk,
+  fetchCartItemsThunk,
   updateQuantityThunk,
   removeFromCartThunk,
   checkoutCartThunk
-} from '../store/userCart'
+} from '../store/cart'
 import history from '../history'
 
 class Cart extends Component {
@@ -105,7 +105,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadCart() {
-      dispatch(getCartItemsThunk())
+      dispatch(fetchCartItemsThunk())
     },
     updateQuantity(mugId, change) {
       dispatch(updateQuantityThunk(mugId, change))

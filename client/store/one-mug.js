@@ -4,19 +4,19 @@ import axios from 'axios'
 const initialState = {}
 
 // Action Types
-const GET_ONE_MUG = 'GET_SINGLE_MUG'
+const GET_ONE_MUG = 'GET_ONE_MUG'
 
 // Actions
-const getOneMug = oneMug => ({type: GET_ONE_MUG, oneMug})
+const gotOneMug = oneMug => ({type: GET_ONE_MUG, oneMug})
 
 // Thunks
-export const oneMugThunk = id => {
+export const fetchOneMugThunk = id => {
   return async dispatch => {
     try {
-      if (!id) dispatch(getOneMug({}))
+      if (!id) dispatch(gotOneMug({}))
       else {
         const {data} = await axios.get(`/api/mugs/${id}`)
-        dispatch(getOneMug(data))
+        dispatch(gotOneMug(data))
       }
     } catch (error) {
       console.log('Ops! we have a trouble finding that Mug', error)

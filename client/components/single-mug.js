@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {oneMugThunk} from '../store/oneMug'
-import {addToCartThunk} from '../store/userCart'
+import {fetchOneMugThunk} from '../store/one-mug'
+import {addToCartThunk} from '../store/cart'
 
 class SingleMug extends Component {
   componentDidMount() {
@@ -47,7 +47,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadMug(id) {
-      dispatch(oneMugThunk(id))
+      dispatch(fetchOneMugThunk(id))
     },
     addMugToCart(mugId) {
       dispatch(addToCartThunk(mugId))

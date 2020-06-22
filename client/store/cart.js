@@ -9,18 +9,18 @@ const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 const CHECKOUT_CART = 'CHECKOUT_CART'
 
-const getAllItems = allItems => ({type: GET_ALL_ITEMS, allItems})
+const gotAllItems = allItems => ({type: GET_ALL_ITEMS, allItems})
 
-const addItem = item => ({
+const addedItemToCart = item => ({
   type: ADD_ITEM,
   item
 })
-const updateItemQuantity = (itemId, change) => ({
+const updatedItemQuantity = (itemId, change) => ({
   type: UPDATE_ITEM_QUANTITY,
   itemId,
   change
 })
-const removeItem = itemId => ({
+const removedItemFromCart = itemId => ({
   type: REMOVE_ITEM,
   itemId
 })
@@ -30,10 +30,10 @@ const checkoutCart = () => ({
 })
 
 // THUNKS
-export const getCartItemsThunk = () => async dispatch => {
+export const fetchCartItemsThunk = () => async dispatch => {
   try {
     const res = await axios.get('/api/cart')
-    dispatch(getAllItems(res.data))
+    dispatch(gotAllItems(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
   }
@@ -42,7 +42,7 @@ export const getCartItemsThunk = () => async dispatch => {
 export const addToCartThunk = id => async dispatch => {
   try {
     const res = await axios.put('/api/cart/add', {mugId: id})
-    dispatch(addItem(res.data))
+    dispatch(addedItemToCart(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
   }
@@ -51,7 +51,7 @@ export const addToCartThunk = id => async dispatch => {
 export const updateQuantityThunk = (itemId, change) => async dispatch => {
   try {
     const res = await axios.put(`/api/cart/update/${itemId}`, change)
-    dispatch(updateItemQuantity(itemId, change.change))
+    dispatch(updatedItemQuantity(itemId, change.change))
   } catch (error) {
     console.log("Thunk error, can't Update item in the cart", error)
   }
@@ -60,7 +60,7 @@ export const updateQuantityThunk = (itemId, change) => async dispatch => {
 export const removeFromCartThunk = itemId => async dispatch => {
   try {
     await axios.delete(`/api/cart/${itemId}`)
-    dispatch(removeItem(itemId))
+    dispatch(removedItemFromCart(itemId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
   }

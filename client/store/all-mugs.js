@@ -3,14 +3,14 @@ import axios from 'axios'
 const initialState = []
 
 const GET_ALL_MUGS = 'GET_ALL_MUGS'
-const getAllMugs = mugs => ({type: GET_ALL_MUGS, mugs})
+const gotAllMugs = mugs => ({type: GET_ALL_MUGS, mugs})
 
 // Thunks
-export const getAllMugsThunk = () => {
+export const fetchAllMugsThunk = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get('/api/mugs')
-      dispatch(getAllMugs(data))
+      dispatch(gotAllMugs(data))
     } catch (error) {
       console.log('Ops! we have a trouble finding Mugs', error)
     }
