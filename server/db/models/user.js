@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 const Order = require('./order')
+const MugOrder = require('./mugOrder')
 
 const User = db.define('user', {
   isAdmin: {
@@ -84,7 +85,16 @@ User.prototype.addMugToCart = async function(mug) {
     this.update({cartId: cart.id})
   } else {
     let cart = await Order.findByPk(this.cartId)
-    cart.addMug(mug, {through: {price: mug.price}})
+
+    const mugInCart = await MugOrder.findOne({
+      where: {orderId: this.cartId, mugId: mug.id}
+    })
+
+    if (mugInCart) {
+      mugInCart.update({quantity: mugInCart.quantity + 1})
+    } else {
+      cart.addMug(mug, {through: {price: mug.price}})
+    }
   }
 }
 /**
