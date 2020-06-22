@@ -86,7 +86,6 @@ User.prototype.addMugToCart = async function(mug) {
     cart.addMug(mug, {through: {price: mug.price}})
   }
 }
-
 /**
  * classMethods
  */

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Mug, User} = require('../db/models')
+const {Mug, User, Order} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -41,13 +41,15 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/', async (req, res, next) => {
   try {
     if (req.user) {
-      const cart = await User.findByPk(req.body.cartId)
+      const cart = await Order.findByPk(req.user.cartId)
       const mug = await Mug.findByPk(req.body.mugId)
-      cart.delete(mug)
-      res.json(cart)
+      cart.removeMug(mug)
+      res.json(req.body.mugId)
+    } else {
+      console.log('In the guest cart')
     }
   } catch (error) {
     console.log('Error in the delete item from cart route', error)
