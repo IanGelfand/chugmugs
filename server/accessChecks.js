@@ -7,17 +7,7 @@ const adminsOnly = (req, res, next) => {
 
   next()
 }
-const usersOnly = (req, res, next) => {
-  if (!req.user) {
-    const err = new Error('Must be logged in')
-    err.status = 401
-    return next(err)
-  }
-
-  next()
-}
 
 module.exports = {
-  adminsOnly,
-  usersOnly
+  adminsOnly
 }
