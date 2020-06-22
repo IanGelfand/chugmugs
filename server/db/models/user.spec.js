@@ -9,6 +9,29 @@ describe('User model', () => {
     return db.sync({force: true})
   })
 
+  describe('Validations', () => {
+    describe('sets isAdmin to false', () => {
+      it('sets isAdmin to false by default', async () => {
+        try {
+          const user = await User.create()
+          expect(user.isAdmin).to.be.equal(false)
+        } catch (error) {
+          console.error('An error occurred while creatinguser. Error: ', error)
+        }
+      })
+    })
+
+    it('requires `email`', async () => {
+      const user = User.build()
+      try {
+        await user.validate()
+        throw new Error('Validation succeeded but should have failed')
+      } catch (err) {
+        expect(err.message).to.contain('email')
+      }
+    })
+  })
+
   describe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
