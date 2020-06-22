@@ -1,6 +1,7 @@
 const mugsSeedData = [
   {
     title: 'Debugging Mug',
+    color: 'white',
     description: `Debugging Definition Mug Funny IT Programming Coding Code Programmer White Coffee Cup Binary Computer Teacher Student Present`,
     price: 2500,
     imgUrl:
@@ -10,6 +11,7 @@ const mugsSeedData = [
   },
   {
     title: 'Python Mug',
+    color: 'white',
     description: `Python Does Java Objects 11 oz Ceramic Mug`,
     price: 2500,
     imgUrl:
@@ -19,6 +21,7 @@ const mugsSeedData = [
   },
   {
     title: 'Coder Mug',
+    color: 'white',
     description: `Coder Mug - Bro, Do You Even Code, Computer Programmer Coffee Mug, Programming, Coder Gift, Coding, Nerd, Geek, Computer Program Coffee Cup`,
     price: 2500,
     imgUrl:
@@ -28,6 +31,7 @@ const mugsSeedData = [
   },
   {
     title: 'Multi-baby Mug',
+    color: 'white',
     description: `Custom Baby face mug (Up to 3 Faces) Personalized photo mug /Custom birthday mug / Father's day gift/ Custom Grandchild Mug/Gift for dad/`,
     price: 2700,
     imgUrl:
@@ -37,6 +41,7 @@ const mugsSeedData = [
   },
   {
     title: 'Boy Multi-baby Mug',
+    color: 'white',
     description: `Custom Baby face mug (Up to 2 Faces) Personalized photo mug /Custom birthday mug / Father's day gift/ Custom Grandchild Mug/Gift for dad/`,
     price: 2400,
     imgUrl:
@@ -46,6 +51,7 @@ const mugsSeedData = [
   },
   {
     title: 'Miller beer mug',
+    color: 'none',
     description: `Hamilton Personalized Beer Mug - Perfect for Beer Lovers, Engraved Beer Mug, Custom Beer Stein, Etched Beer Mug, Retirement Gift, Birthday`,
     price: 1400,
     imgUrl:
@@ -55,6 +61,7 @@ const mugsSeedData = [
   },
   {
     title: 'Binary mug',
+    color: 'white',
     description: `Curse your friend out in computer language without them knowing!`,
     price: 1400,
     imgUrl:
@@ -64,6 +71,7 @@ const mugsSeedData = [
   },
   {
     title: 'Cookie holder mug',
+    color: 'white',
     description: `Cookie pocket mug for cookie fans!`,
     price: 1500,
     imgUrl:
@@ -73,6 +81,7 @@ const mugsSeedData = [
   },
   {
     title: 'Sh*tty mug',
+    color: 'white',
     description: `Blursed mug for all the sh*tty people in your life.`,
     price: 13700,
     imgUrl:
@@ -82,6 +91,7 @@ const mugsSeedData = [
   },
   {
     title: 'Cow Mug',
+    color: 'white/black',
     description: `Cow mug that stands on its utters!`,
     price: 1300,
     imgUrl:
@@ -91,6 +101,7 @@ const mugsSeedData = [
   },
   {
     title: 'Up to no good marshmallow mug  ',
+    color: 'white',
     description: `It will never lose sight of you!`,
     price: 2700,
     imgUrl:
@@ -100,6 +111,7 @@ const mugsSeedData = [
   },
   {
     title: 'Grinch mug',
+    color: 'green',
     description: `Perfect gift for the holidays!`,
     price: 2000,
     imgUrl:
@@ -109,6 +121,7 @@ const mugsSeedData = [
   },
   {
     title: 'Assasin mug',
+    color: 'black',
     description: `Perfect gift for your assassin friends!`,
     price: 2500,
     imgUrl:
@@ -118,6 +131,7 @@ const mugsSeedData = [
   },
   {
     title: 'Boo mug',
+    color: 'white',
     description: `Boo mug makes the perfect gift for your boo!`,
     price: 1300,
     imgUrl:
@@ -127,6 +141,7 @@ const mugsSeedData = [
   },
   {
     title: 'I am Groot mug',
+    color: 'brown',
     description: `This mug makes a perfect gift for you groot fanatic friends!`,
     price: 1700,
     imgUrl:
@@ -136,6 +151,7 @@ const mugsSeedData = [
   },
   {
     title: 'Squidward mug',
+    color: 'seafoam',
     description: `Perfect gift for your spongebob fanatic friends!`,
     price: 15000,
     imgUrl:
@@ -145,6 +161,7 @@ const mugsSeedData = [
   },
   {
     title: 'Thor hammer mug',
+    color: 'silver',
     description: `Perfect gift for your marvel fanatic friends!`,
     price: 1500,
     imgUrl:
@@ -154,6 +171,7 @@ const mugsSeedData = [
   },
   {
     title: 'Cacti mug',
+    color: 'green',
     description: `Cacti mug makes the perfect gift for your plant hoarding friends!`,
     price: 1300,
     imgUrl:
@@ -163,6 +181,7 @@ const mugsSeedData = [
   },
   {
     title: 'Iron man mug',
+    color: 'white/red',
     description: `Perfect for you marvel fanatic friends!`,
     price: 7400,
     imgUrl:
@@ -172,6 +191,7 @@ const mugsSeedData = [
   },
   {
     title: 'DK mug',
+    color: 'brown',
     description: `Perfect for you Nintendo playing friends!`,
     price: 1500,
     imgUrl:
@@ -181,6 +201,7 @@ const mugsSeedData = [
   },
   {
     title: 'Sloth handle mug',
+    color: 'brown',
     description: `Perfect for your sloth-loving friends!`,
     price: 1500,
     imgUrl:
@@ -190,14 +211,17 @@ const mugsSeedData = [
   },
   {
     title: 'Pumpkin mug',
+    color: 'white/orange',
     description: `Perfect for your pumpkin spice lattes ;) !`,
     price: 2500,
-    imgUrl: 'imgs/hedgehog-ale-stone-1.jpg',
+    imgUrl:
+      'https://i.pinimg.com/564x/42/5f/81/425f81cedd906bbdccc31473b213a37a.jpg',
     stock: 4,
     capacity: 12
   },
   {
     title: 'Dark bat mug',
+    color: 'black',
     description: `Perfect for your bat-loving friends!`,
     price: 1500,
     imgUrl:
@@ -207,6 +231,7 @@ const mugsSeedData = [
   },
   {
     title: 'Blue bird mug',
+    color: 'blue/white',
     description: `Perfect mug for anyone!`,
     price: 1500,
     imgUrl:
@@ -216,6 +241,7 @@ const mugsSeedData = [
   },
   {
     title: 'Multi-face cat mug',
+    color: 'white',
     description: `For all of your cat-lover friends!`,
     price: 1900,
     imgUrl:

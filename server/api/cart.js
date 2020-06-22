@@ -7,9 +7,10 @@ router.get('/', async (req, res, next) => {
     if (req.user) {
       const cart = await req.user.getCart()
       res.json(cart)
-    } else {
-      res.json(req.session.cart || [])
     }
+    // else {
+    //   res.json(req.session.cart || [])
+    // }
   } catch (error) {
     next(error)
   }
@@ -18,22 +19,24 @@ router.get('/', async (req, res, next) => {
 router.put('/add', async (req, res, next) => {
   try {
     const mug = await Mug.findByPk(req.body.mugId)
+
     const cartMug = {
-      id: mug.id,
-      title: mug.title,
-      price: mug.price,
-      capacity: mug.capacity,
-      material: mug.material,
-      imgUrl: mug.imgUrl,
+      id: mug.dataValues.id,
+      title: mug.dataValues.title,
+      color: mug.dataValues.color,
+      price: mug.dataValues.price,
+      capacity: mug.dataValues.capacity,
+      description: mug.dataValues.description,
+      imgUrl: mug.dataValues.imgUrl,
       quantity: 1
     }
 
     if (req.user) await req.user.addMugToCart(mug)
-    else {
-      if (!req.session.cart) req.session.cart = []
+    // else {
+    //   if (!req.session.cart) req.session.cart = []
 
-      req.session.cart.push(cartMug)
-    }
+    //   req.session.cart.push(cartMug)
+    // }
 
     res.json(cartMug)
   } catch (error) {

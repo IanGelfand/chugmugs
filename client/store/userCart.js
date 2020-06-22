@@ -32,6 +32,7 @@ const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 const REMOVE_ITEM = 'REMOVE_ITEM'
 
 const getAllItems = allItems => ({type: GET_ALL_ITEMS, allItems})
+
 const addItem = item => ({
   type: ADD_ITEM,
   item
@@ -48,7 +49,7 @@ const updateItemQuantity = updatedItem => ({
 // THUNKS
 export const getCartItemsThunk = () => async dispatch => {
   try {
-    const res = await axios.get('./api/cart')
+    const res = await axios.get('/api/cart')
     dispatch(getAllItems(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
@@ -57,7 +58,7 @@ export const getCartItemsThunk = () => async dispatch => {
 
 export const addToCartThunk = id => async dispatch => {
   try {
-    const res = await axios.put('./api/cart/add', {mugId: id})
+    const res = await axios.put('/api/cart/add', {mugId: id})
     dispatch(addItem(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
@@ -66,7 +67,7 @@ export const addToCartThunk = id => async dispatch => {
 
 export const removeFromCartThunk = itemId => async dispatch => {
   try {
-    await axios.delete(`./api/cart${itemId}`)
+    await axios.delete(`/api/cart`, {mugId: itemId})
     dispatch(removeItem(itemId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
@@ -75,7 +76,7 @@ export const removeFromCartThunk = itemId => async dispatch => {
 
 export const updateQuantityThunk = updatedItem => async dispatch => {
   try {
-    const res = await axios.patch(`./api/cart${updatedItem.id}`, updatedItem)
+    const res = await axios.patch(`/api/cart${updatedItem.id}`, updatedItem)
     dispatch(updateItemQuantity(res.data))
   } catch (error) {
     console.log("Thunk error, can't Update item in the cart", error)
@@ -90,7 +91,7 @@ const cartReducer = (state = initialState, action) => {
     case ADD_ITEM:
       return [...state, action.item]
     case REMOVE_ITEM:
-      return state.filter(item => item.id !== action.id)
+      return state.filter(item => item.id !== action.itemId)
     case UPDATE_ITEM_QUANTITY:
       return state.map(item => {
         if (item.id === action.updatedItem.id) return action.updatedItem

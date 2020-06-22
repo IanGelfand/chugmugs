@@ -22,9 +22,9 @@ const Mug = db.define('mug', {
     type: Sequelize.INTEGER,
     allowNull: true
   },
-  material: {
-    type: Sequelize.STRING,
-    allowNull: true
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false
   },
   imgUrl: {
     type: Sequelize.TEXT,
