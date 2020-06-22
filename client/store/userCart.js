@@ -1,35 +1,13 @@
 import axios from 'axios'
 
-// const cartItem = {
-//   cartItemId: "123",
-//   qty: 3,
-//   subtotal: 30.00,
-
-//   product: {
-//     name: "MUG 1",
-//     color: "Blue",
-//     material: "Metal",
-//     price: 10.00
-//   }
-// }
-
-// cart: {
-//   cartId,
-//   total,
-//   items: [
-
-//   ]
-// }
-
-/// Receive allCart every time!!!
-
-const initialState = []
+const initialState = {}
 
 // ACTIONS
 const GET_ALL_ITEMS = 'GET_ALL_ITEMS'
 const ADD_ITEM = 'ADD_ITEM'
 const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 const REMOVE_ITEM = 'REMOVE_ITEM'
+const CHECKOUT_CART = 'CHECKOUT_CART'
 
 const getAllItems = allItems => ({type: GET_ALL_ITEMS, allItems})
 
@@ -37,13 +15,18 @@ const addItem = item => ({
   type: ADD_ITEM,
   item
 })
+const updateItemQuantity = (itemId, change) => ({
+  type: UPDATE_ITEM_QUANTITY,
+  itemId,
+  change
+})
 const removeItem = itemId => ({
   type: REMOVE_ITEM,
   itemId
 })
-const updateItemQuantity = updatedItem => ({
-  type: UPDATE_ITEM_QUANTITY,
-  updatedItem
+
+const checkoutCart = () => ({
+  type: CHECKOUT_CART
 })
 
 // THUNKS
@@ -65,38 +48,78 @@ export const addToCartThunk = id => async dispatch => {
   }
 }
 
+export const updateQuantityThunk = (itemId, change) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/cart/update/${itemId}`, change)
+    dispatch(updateItemQuantity(itemId, change))
+  } catch (error) {
+    console.log("Thunk error, can't Update item in the cart", error)
+  }
+}
+
 export const removeFromCartThunk = itemId => async dispatch => {
   try {
-    await axios.delete(`/api/cart`, {mugId: itemId})
+    await axios.delete(`/api/cart/${itemId}`)
     dispatch(removeItem(itemId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
   }
 }
 
-export const updateQuantityThunk = updatedItem => async dispatch => {
+export const checkoutCartThunk = () => async dispatch => {
   try {
-    const res = await axios.patch(`/api/cart${updatedItem.id}`, updatedItem)
-    dispatch(updateItemQuantity(res.data))
+    await axios.put('/api/cart/checkout')
+    dispatch(checkoutCart())
   } catch (error) {
-    console.log("Thunk error, can't Update item in the cart", error)
+    console.log("Thunk error, can't checkout cart", error)
   }
 }
-
 // REDUCER CART
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_ITEMS:
-      return [...action.allItems]
-    case ADD_ITEM:
-      return [...state, action.item]
-    case REMOVE_ITEM:
-      return state.filter(item => item.id !== action.itemId)
-    case UPDATE_ITEM_QUANTITY:
-      return state.map(item => {
-        if (item.id === action.updatedItem.id) return action.updatedItem
-        else return item
+      const cart = {}
+
+      action.allItems.forEach(mug => {
+        cart[mug.id] = {
+          title: mug.title,
+          price: mug.price,
+          imgUrl: mug.imgUrl,
+          quantity: mug.quantity
+        }
       })
+
+      return {...cart}
+
+    case ADD_ITEM:
+      if (!state[action.item.id]) {
+        state[action.item.id] = {
+          title: action.item.title,
+          price: action.item.price,
+          imgUrl: action.item.imgUrl,
+          quantity: 1
+        }
+
+        return {...state}
+      } else {
+        state[action.item.id].quantity++
+
+        return {...state}
+      }
+
+    case UPDATE_ITEM_QUANTITY:
+      state[action.itemId].quantity += action.change
+
+      return {...state}
+
+    case REMOVE_ITEM:
+      state[action.itemId] = undefined
+
+      return {...state}
+
+    case CHECKOUT_CART:
+      return initialState
+
     default:
       return state
   }

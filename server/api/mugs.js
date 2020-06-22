@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const {Mug} = require('../db/models')
+const {Mug, User} = require('../db/models')
 const {adminsOnly} = require('../accessChecks')
-
 module.exports = router
 
 router.get('/', async (req, res, next) => {

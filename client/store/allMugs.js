@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import import history from '../history';
 
 const initialState = []
 
