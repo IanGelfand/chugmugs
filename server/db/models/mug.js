@@ -11,7 +11,7 @@ const Mug = db.define('mug', {
     }
   },
   color: {
-    type: Sequelize.STRING,
+    type: Sequelize.ENUM,
     allowNull: true
   },
   price: {
