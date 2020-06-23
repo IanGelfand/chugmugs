@@ -62,7 +62,7 @@ describe('Mug routes', () => {
   xdescribe('GET /mugs/:id', () => {
     let coolMug
     beforeEach(async () => {
-      const creatingMugs = [
+      await Mug.bulkCreate([
         {
           title: 'Boring Mug',
           price: 1250,
@@ -78,17 +78,14 @@ describe('Mug routes', () => {
           price: 1250,
           description: 'This Mug is riveting'
         }
-      ].map(data => Mug.create(data))
-      const createdMugs = await Promise.all(creatingMugs)
-      console.log(createdMugs)
-      coolMug = createdMugs[1]
+      ])
     })
     /**
      * This is a proper GET /Mugs/ID request
      * where we search by the ID of the Mug created above
      */
     it('returns the JSON of the Mug based on the id', async () => {
-      const res = await agent.get('/mugs/' + coolMug.id).expect(200)
+      const res = await agent.get('/mugs/1').expect(200)
       if (typeof res.body === 'string') {
         res.body = JSON.parse(res.body)
       }
