@@ -25,10 +25,8 @@ router.post('/signup', async (req, res, next) => {
       res.status(400).send('Password required')
     } else {
       const user = await User.create({
-        attributes: ['id', 'email', 'password'],
-        where: {
-          id: req.params.id
-        }
+        email: req.body.email,
+        password: req.body.password
       })
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
