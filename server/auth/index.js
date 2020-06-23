@@ -22,9 +22,12 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     if (!req.body.password) {
-      res.status(400).send('No password entered')
+      res.status(400).send('Password required')
     } else {
-      const user = await User.create(req.body)
+      const user = await User.create({
+        email: req.body.email,
+        password: req.body.password
+      })
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
