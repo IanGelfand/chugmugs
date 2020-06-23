@@ -14,8 +14,23 @@ nav a {
   display: inline-block;
   margin: 1em;
 }
-
+div.navbar {
+  background-color: #e5e5e5;
+}
 form div {
   margin: 1em;
   display: inline-block;
+}
+.single-mug-page {
+  margin: 2rem;
+}
+.single-mug {
+  display: flex;
+  flex-direction: row;
+}
+.addCartButton {
+  float: right;
+}
+.left {
+  margin: 2rem;
 }
