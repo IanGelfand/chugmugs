@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
 import {
-  fetchCartItemsThunk,
-  updateQuantityThunk,
-  removeFromCartThunk,
-  checkoutCartThunk
+  getCart,
+  changeMugQuantity,
+  removeMugFromCart,
+  checkoutCart
 } from '../store/cart'
 import history from '../history'
 
@@ -16,20 +16,12 @@ class Cart extends Component {
   }
 
   render() {
-    const {cart, checkoutMugs, updateQuantity, removeMugFromCart} = this.props
+    const {cart, checkout, changeQuantity, removeMug} = this.props
 
     const mugs = []
 
     for (let mug in cart) {
-      if (cart[mug]) {
-        mugs.push({
-          id: +mug,
-          title: cart[mug].title,
-          price: cart[mug].price,
-          imgUrl: cart[mug].imgUrl,
-          quantity: cart[mug].quantity
-        })
-      }
+      if (cart[mug]) mugs.push({...cart[mug]})
     }
 
     let totalMugs = mugs.reduce((sum, mug) => sum + mug.quantity, 0)
@@ -38,12 +30,12 @@ class Cart extends Component {
       mugs.reduce((sum, mug) => sum + mug.price * mug.quantity, 0) / 100
 
     return (
-      <React.Fragment>
+      <div>
         <h3>Your Shopping Cart</h3>
         {!totalMugs ? (
           <h1>Your Cart Is Empty</h1>
         ) : (
-          <React.Fragment>
+          <div>
             <div>
               <h5>Your Total is: ${totalPrice}</h5>
             </div>
@@ -51,7 +43,7 @@ class Cart extends Component {
               <button
                 type="button"
                 onClick={() => {
-                  checkoutMugs()
+                  checkout()
                   history.push('/checkout')
                 }}
               >
@@ -60,38 +52,35 @@ class Cart extends Component {
             </div>
             <div id="cart-list">
               {mugs.map(mug => (
-                <React.Fragment key={mug.id}>
-                  <Mug {...mug} />
+                <div key={mug.id}>
+                  <Mug mug={mug} />
                   <div>
                     <span>Quantity: </span>
                     <span
                       onClick={() => {
-                        if (mug.quantity <= 1) removeMugFromCart(mug.id)
-                        else updateQuantity(mug.id, {change: -1})
+                        if (mug.quantity <= 1) removeMug(mug.id)
+                        else changeQuantity(mug.id, {change: -1})
                       }}
                     >
                       -
                     </span>
                     _{mug.quantity}_
-                    <span onClick={() => updateQuantity(mug.id, {change: 1})}>
+                    <span onClick={() => changeQuantity(mug.id, {change: 1})}>
                       {' '}
                       +{' '}
                     </span>
                   </div>
                   <div>
-                    <button
-                      type="button"
-                      onClick={() => removeMugFromCart(mug.id)}
-                    >
+                    <button type="button" onClick={() => removeMug(mug.id)}>
                       Remove Mug From Cart
                     </button>
                   </div>
-                </React.Fragment>
+                </div>
               ))}
             </div>
-          </React.Fragment>
+          </div>
         )}
-      </React.Fragment>
+      </div>
     )
   }
 }
@@ -105,16 +94,16 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadCart() {
-      dispatch(fetchCartItemsThunk())
+      dispatch(getCart())
     },
-    updateQuantity(mugId, change) {
-      dispatch(updateQuantityThunk(mugId, change))
+    changeQuantity(mugId, change) {
+      dispatch(changeMugQuantity(mugId, change))
     },
-    removeMugFromCart(mugId) {
-      dispatch(removeFromCartThunk(mugId))
+    removeMug(mugId) {
+      dispatch(removeMugFromCart(mugId))
     },
-    checkoutMugs() {
-      dispatch(checkoutCartThunk())
+    checkout() {
+      dispatch(checkoutCart())
     }
   }
 }
@@ -124,7 +113,7 @@ export default connect(mapState, mapDispatch)(Cart)
 Cart.propTypes = {
   cart: PropTypes.object.isRequired,
   loadCart: PropTypes.func.isRequired,
-  updateQuantity: PropTypes.func.isRequired,
-  removeMugFromCart: PropTypes.func.isRequired,
-  checkoutMugs: PropTypes.func.isRequired
+  changeQuantity: PropTypes.func.isRequired,
+  removeMug: PropTypes.func.isRequired,
+  checkout: PropTypes.func.isRequired
 }

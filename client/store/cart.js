@@ -3,73 +3,75 @@ import axios from 'axios'
 const initialState = {}
 
 // ACTIONS
-const GET_ALL_ITEMS = 'GET_ALL_ITEMS'
-const ADD_ITEM = 'ADD_ITEM'
-const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
-const REMOVE_ITEM = 'REMOVE_ITEM'
-const CHECKOUT_CART = 'CHECKOUT_CART'
+const SET_CART = 'SET_CART'
+const ADD_MUG = 'ADD_MUG'
+const UPDATE_MUG_QUANTITY = 'UPDATE_MUG_QUANTITY'
+const REMOVE_MUG = 'REMOVE_MUG'
+const RESET_CART = 'RESET_CART'
 
-const gotAllItems = allItems => ({type: GET_ALL_ITEMS, allItems})
+const setCart = cartMugs => ({type: SET_CART, cartMugs})
 
-const addedItemToCart = item => ({
-  type: ADD_ITEM,
-  item
+const addMug = mug => ({
+  type: ADD_MUG,
+  mug
 })
-const updatedItemQuantity = (itemId, change) => ({
-  type: UPDATE_ITEM_QUANTITY,
-  itemId,
+
+const updateMugQuantity = (mugId, change) => ({
+  type: UPDATE_MUG_QUANTITY,
+  mugId,
   change
 })
-const removedItemFromCart = itemId => ({
-  type: REMOVE_ITEM,
-  itemId
+
+const removeMug = mugId => ({
+  type: REMOVE_MUG,
+  mugId
 })
 
-const checkoutCart = () => ({
-  type: CHECKOUT_CART
+export const resetCart = () => ({
+  type: RESET_CART
 })
 
 // THUNKS
-export const fetchCartItemsThunk = () => async dispatch => {
+export const getCart = () => async dispatch => {
   try {
     const res = await axios.get('/api/cart')
-    dispatch(gotAllItems(res.data))
+    dispatch(setCart(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
   }
 }
 
-export const addToCartThunk = id => async dispatch => {
+export const addMugToCart = mugId => async dispatch => {
   try {
-    const res = await axios.put('/api/cart/add', {mugId: id})
-    dispatch(addedItemToCart(res.data))
+    const res = await axios.put('/api/cart/add', {mugId: mugId})
+    dispatch(addMug(res.data))
   } catch (error) {
     console.log("Thunk error, can't get All Cart Items", error)
   }
 }
 
-export const updateQuantityThunk = (itemId, change) => async dispatch => {
+export const changeMugQuantity = (mugId, change) => async dispatch => {
   try {
-    const res = await axios.put(`/api/cart/update/${itemId}`, change)
-    dispatch(updatedItemQuantity(itemId, change.change))
+    await axios.put(`/api/cart/update/${mugId}`, change)
+    dispatch(updateMugQuantity(mugId, change.change))
   } catch (error) {
     console.log("Thunk error, can't Update item in the cart", error)
   }
 }
 
-export const removeFromCartThunk = itemId => async dispatch => {
+export const removeMugFromCart = mugId => async dispatch => {
   try {
-    await axios.delete(`/api/cart/${itemId}`)
-    dispatch(removedItemFromCart(itemId))
+    await axios.delete(`/api/cart/${mugId}`)
+    dispatch(removeMug(mugId))
   } catch (error) {
     console.log("Thunk error, can't Remove item from cart", error)
   }
 }
 
-export const checkoutCartThunk = () => async dispatch => {
+export const checkoutCart = () => async dispatch => {
   try {
     await axios.put('/api/cart/checkout')
-    dispatch(checkoutCart())
+    dispatch(resetCart())
   } catch (error) {
     console.log("Thunk error, can't checkout cart", error)
   }
@@ -77,47 +79,34 @@ export const checkoutCartThunk = () => async dispatch => {
 // REDUCER CART
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_ITEMS:
+    case SET_CART:
       const cart = {}
 
-      action.allItems.forEach(mug => {
-        cart[mug.id] = {
-          title: mug.title,
-          price: mug.price,
-          imgUrl: mug.imgUrl,
-          quantity: mug.quantity
-        }
+      action.cartMugs.forEach(mug => {
+        cart[mug.id] = {...mug}
       })
 
       return {...cart}
 
-    case ADD_ITEM:
-      if (!state[action.item.id]) {
-        state[action.item.id] = {
-          title: action.item.title,
-          price: action.item.price,
-          imgUrl: action.item.imgUrl,
-          quantity: 1
-        }
-
-        return {...state}
-      } else {
-        state[action.item.id].quantity++
-
-        return {...state}
-      }
-
-    case UPDATE_ITEM_QUANTITY:
-      state[action.itemId].quantity += action.change
+    case ADD_MUG:
+      if (!state[action.mug.id]) {
+        state[action.mug.id] = {...action.mug}
+        state[action.mug.id].quantity = 1
+      } else state[action.mug.id].quantity++
 
       return {...state}
 
-    case REMOVE_ITEM:
-      state[action.itemId] = undefined
+    case UPDATE_MUG_QUANTITY:
+      state[action.mugId].quantity += action.change
 
       return {...state}
 
-    case CHECKOUT_CART:
+    case REMOVE_MUG:
+      state[action.mugId] = undefined
+
+      return {...state}
+
+    case RESET_CART:
       return initialState
 
     default:
