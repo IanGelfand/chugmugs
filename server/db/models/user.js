@@ -35,9 +35,6 @@ const User = db.define('user', {
     type: Sequelize.TEXT,
     defaultValue: 'https://bit.ly/37Lab4d'
   },
-  cartId: {
-    type: Sequelize.INTEGER
-  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -61,9 +58,10 @@ User.prototype.correctPassword = function(candidatePwd) {
 }
 
 User.prototype.getCart = async function() {
-  if (!this.cartId) return []
+  const cart = await Order.findOne({where: {completed: false, userId: this.id}})
 
-  const cart = await Order.findByPk(this.cartId)
+  if (!cart) return []
+
   const cartMugs = await cart.getMugs()
 
   return cartMugs.map(mug => ({
@@ -79,15 +77,14 @@ User.prototype.getCart = async function() {
 }
 
 User.prototype.addMugToCart = async function(mug) {
-  if (!this.cartId) {
-    let cart = await Order.create({userId: this.id})
-    cart.addMug(mug, {through: {price: mug.price}})
-    this.update({cartId: cart.id})
-  } else {
-    let cart = await Order.findByPk(this.cartId)
+  const cart = await Order.findOne({where: {completed: false, userId: this.id}})
 
+  if (!cart) {
+    const newCart = await Order.create({userId: this.id})
+    newCart.addMug(mug, {through: {price: mug.price}})
+  } else {
     const mugInCart = await MugOrder.findOne({
-      where: {orderId: this.cartId, mugId: mug.id}
+      where: {orderId: cart.id, mugId: mug.id}
     })
 
     if (mugInCart) {

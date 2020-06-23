@@ -9,16 +9,16 @@ router.get('/', async (req, res, next) => {
 
       res.json(cartMugs)
     } else if (!req.session.cart) res.json([])
-      else {
-        const sessionCartMugs = []
+    else {
+      const sessionCartMugs = []
 
-        for (let mug in req.session.cart) {
-          if (req.session.cart[mug])
-            sessionCartMugs.push({...req.session.cart[mug]})
-        }
-
-        res.json(sessionCartMugs)
+      for (let mug in req.session.cart) {
+        if (req.session.cart[mug])
+          sessionCartMugs.push({...req.session.cart[mug]})
       }
+
+      res.json(sessionCartMugs)
+    }
   } catch (error) {
     next(error)
   }
@@ -57,8 +57,12 @@ router.put('/add', async (req, res, next) => {
 router.put('/update/:mugId', async (req, res, next) => {
   try {
     if (req.user) {
+      const cart = await Order.findOne({
+        where: {completed: false, userId: req.user.id}
+      })
+
       const mugInCart = await MugOrder.findOne({
-        where: {orderId: req.user.cartId, mugId: req.params.mugId}
+        where: {orderId: cart.id, mugId: req.params.mugId}
       })
 
       mugInCart.update({quantity: mugInCart.quantity + req.body.change})
@@ -73,8 +77,12 @@ router.put('/update/:mugId', async (req, res, next) => {
 router.delete('/:mugId', async (req, res, next) => {
   try {
     if (req.user) {
-      const cart = await Order.findByPk(req.user.cartId)
+      const cart = await Order.findOne({
+        where: {completed: false, userId: req.user.id}
+      })
+
       const mug = await Mug.findByPk(req.params.mugId)
+
       cart.removeMug(mug)
     } else req.session.cart[req.params.mugId] = undefined
 
@@ -88,13 +96,13 @@ router.delete('/:mugId', async (req, res, next) => {
 router.put('/checkout', async (req, res, next) => {
   try {
     if (req.user) {
-      const cart = await Order.findByPk(req.user.cartId)
+      const cart = await Order.findOne({
+        where: {completed: false, userId: req.user.id}
+      })
 
       cart.update({completed: true})
 
-      let newCart = await Order.create({userId: req.user.id})
-
-      req.user.update({cartId: newCart.id})
+      await Order.create({userId: req.user.id})
     } else req.session.cart = {}
 
     res.sendStatus(200)
