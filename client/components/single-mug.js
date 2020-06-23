@@ -11,7 +11,7 @@ const SingleMug = ({addMugToCart, location}) => {
       {!mug ? (
         <div />
       ) : (
-        <div>
+        <div className="single-mug-page">
           <div className="single-mug">
             <h2>{mug.title}</h2>
             <img src={mug.imgUrl} />

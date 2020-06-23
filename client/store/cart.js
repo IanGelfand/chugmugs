@@ -76,7 +76,8 @@ export const checkoutCart = () => async dispatch => {
     console.log("Thunk error, can't checkout cart", error)
   }
 }
-// REDUCER CART
+
+// CART REDUCER
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_CART:
@@ -102,7 +103,7 @@ const cartReducer = (state = initialState, action) => {
       return {...state}
 
     case REMOVE_MUG:
-      state[action.mugId] = undefined
+      state[action.mugId] = null
 
       return {...state}
 

@@ -35,8 +35,8 @@ class Cart extends Component {
         {!totalMugs ? (
           <h1>Your Cart Is Empty</h1>
         ) : (
-          <div>
-            <div>
+          <div id="cart">
+            <div id="subtotal">
               <h5>Your Total is: ${totalPrice}</h5>
             </div>
             <div>
@@ -50,24 +50,33 @@ class Cart extends Component {
                 Checkout
               </button>
             </div>
-            <div id="cart-list">
+            <div id="cart-mugs" className="mug-list">
               {mugs.map(mug => (
-                <div key={mug.id}>
+                <div key={mug.id} className="cart-mug">
                   <Mug mug={mug} />
-                  <div>
+                  <div className="quantity">
                     <span>Quantity: </span>
-                    <span
-                      onClick={() => {
-                        if (mug.quantity <= 1) removeMug(mug.id)
-                        else changeQuantity(mug.id, {change: -1})
-                      }}
-                    >
-                      -
+                    <span>
+                      <button
+                        type="button"
+                        className="quantity-button"
+                        onClick={() => {
+                          if (mug.quantity <= 1) removeMug(mug.id)
+                          else changeQuantity(mug.id, {change: -1})
+                        }}
+                      >
+                        -
+                      </button>
                     </span>
-                    _{mug.quantity}_
-                    <span onClick={() => changeQuantity(mug.id, {change: 1})}>
-                      {' '}
-                      +{' '}
+                    {mug.quantity}
+                    <span>
+                      <button
+                        type="button"
+                        className="quantity-button"
+                        onClick={() => changeQuantity(mug.id, {change: 1})}
+                      >
+                        +
+                      </button>
                     </span>
                   </div>
                   <div>
