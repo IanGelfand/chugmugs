@@ -15,9 +15,11 @@ export const UserHome = ({user}) => {
           <Login />
         </div>
       ) : (
-        <div>
-          <h3>Welcome, {user.email}</h3>
-          <img src={user.imgUrl} width="400" height="400" />
+        <div id="user-page">
+          <div id="user-info">
+            <h3>Welcome, {user.email}</h3>
+            <img src={user.imgUrl} width="400" height="400" />
+          </div>
           <Cart />
         </div>
       )}

@@ -7,6 +7,7 @@ router.post('/login', async (req, res, next) => {
     const user = await User.findOne({
       where: {email: req.body.email}
     })
+
     if (!user) {
       res.status(401).send('Wrong username and/or password')
     } else if (!user.correctPassword(req.body.password)) {
@@ -50,4 +51,5 @@ router.post('/logout', (req, res) => {
 router.get('/me', (req, res) => {
   res.json(req.user)
 })
+
 router.use('/google', require('./google'))

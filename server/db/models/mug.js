@@ -4,7 +4,6 @@ const db = require('../db')
 const Mug = db.define('mug', {
   title: {
     type: Sequelize.STRING,
-    // unique: false,
     allowNull: false,
     validate: {
       notEmpty: true

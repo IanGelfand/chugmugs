@@ -16,6 +16,7 @@ router.get('/', adminsOnly, async (req, res, next) => {
         'googleId'
       ]
     })
+
     res.json(users)
   } catch (err) {
     next(err)
@@ -38,22 +39,9 @@ router.get('/:id', adminsOnly, async (req, res, next) => {
         id: req.params.id
       }
     })
+
     res.json(user)
   } catch (error) {
     next(error)
   }
 })
-
-// router.put('/', async (req, res, next) => {
-//   if (User.isAdmin) {
-//     const userId = req.body.id
-//     try {
-//       await userId.update(req.body, {where: {id: userId}})
-//       res.sendStatus(204)
-//     } catch (error) {
-//       next(error)
-//     }
-//   } else {
-//     res.send('Sorry you are not authorized to view this :(')
-//   }
-// })

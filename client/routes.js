@@ -19,7 +19,6 @@ import {me} from './store/user'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    console.log('loading user')
   }
 
   render() {

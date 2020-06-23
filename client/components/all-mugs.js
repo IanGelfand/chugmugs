@@ -17,7 +17,7 @@ class AllMugs extends Component {
     ) : (
       <div>
         <h3>Which Mug Will You Chug?</h3>
-        <div id="mug-list">
+        <div id="all-mugs" className="mug-list">
           {mugs.map(mug => <Mug key={mug.id} mug={mug} />)}
         </div>
       </div>

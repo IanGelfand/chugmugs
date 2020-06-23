@@ -9,16 +9,16 @@ router.get('/', async (req, res, next) => {
 
       res.json(cartMugs)
     } else if (!req.session.cart) res.json([])
-    else {
-      const sessionCartMugs = []
+      else {
+        const sessionCartMugs = []
 
-      for (let mug in req.session.cart) {
-        if (req.session.cart[mug])
-          sessionCartMugs.push({...req.session.cart[mug]})
+        for (let mug in req.session.cart) {
+          if (req.session.cart[mug])
+            sessionCartMugs.push({...req.session.cart[mug]})
+        }
+
+        res.json(sessionCartMugs)
       }
-
-      res.json(sessionCartMugs)
-    }
   } catch (error) {
     next(error)
   }

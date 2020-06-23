@@ -23,6 +23,7 @@ const mugsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MUGS:
       return [...action.mugs]
+
     default:
       return state
   }

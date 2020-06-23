@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Checkout = props => (
-  <div>
+  <div id="checkout">
     <h1>Wow. Such Checkout.</h1>
   </div>
 )
