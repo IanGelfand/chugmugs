@@ -102,7 +102,7 @@ const cartReducer = (state = initialState, action) => {
       return {...state}
 
     case REMOVE_MUG:
-      state[action.mugId] = undefined
+      state[action.mugId] = null
 
       return {...state}
 

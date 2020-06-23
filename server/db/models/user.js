@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 const Order = require('./order')
+const Mug = require('./mug')
 const MugOrder = require('./mugOrder')
 
 const User = db.define('user', {
@@ -94,6 +95,18 @@ User.prototype.addMugToCart = async function(mug) {
     }
   }
 }
+
+User.prototype.mergeGuestCart = async function(sessionCart) {
+  for (let mug in sessionCart) {
+    if (sessionCart[mug]) {
+      const cartMug = await Mug.findByPk(+mug)
+      for (let i = 1; i <= sessionCart[mug].quantity; i++) {
+        await this.addMugToCart(cartMug)
+      }
+    }
+  }
+}
+
 /**
  * classMethods
  */

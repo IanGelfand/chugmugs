@@ -84,7 +84,7 @@ router.delete('/:mugId', async (req, res, next) => {
       const mug = await Mug.findByPk(req.params.mugId)
 
       cart.removeMug(mug)
-    } else req.session.cart[req.params.mugId] = undefined
+    } else req.session.cart[req.params.mugId] = null
 
     res.json(req.params.mugId)
   } catch (error) {

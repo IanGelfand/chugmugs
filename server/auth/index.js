@@ -12,6 +12,11 @@ router.post('/login', async (req, res, next) => {
     } else if (!user.correctPassword(req.body.password)) {
       res.status(401).send('Wrong username and/or password')
     } else {
+      if (req.session.cart) {
+        await user.mergeGuestCart(req.session.cart)
+        req.session.cart = null
+      }
+
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
