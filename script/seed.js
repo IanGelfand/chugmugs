@@ -26,8 +26,6 @@ async function seed() {
     const cart = await Order.create({userId: users[i].id})
     let cartMugs = {}
 
-    users[i].update({cartId: cart.id})
-
     for (let j = 1; j < 4; j++) {
       let randMug = {}
 
@@ -54,8 +52,8 @@ async function seed() {
   }
   // <--------------------------------------
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${mugs.length} mugs`)
+  console.log(`seeded ${mugs.length} mugs and 100 fake products`)
+  console.log(`seeded ${users.length} users and ${users.length - 1} carts`)
   console.log(`seeded successfully`)
 }
 
