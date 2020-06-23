@@ -56,18 +56,25 @@ class Cart extends Component {
                   <Mug mug={mug} />
                   <div>
                     <span>Quantity: </span>
-                    <span
-                      onClick={() => {
-                        if (mug.quantity <= 1) removeMug(mug.id)
-                        else changeQuantity(mug.id, {change: -1})
-                      }}
-                    >
-                      -
+                    <span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (mug.quantity <= 1) removeMug(mug.id)
+                          else changeQuantity(mug.id, {change: -1})
+                        }}
+                      >
+                        -
+                      </button>
                     </span>
-                    _{mug.quantity}_
-                    <span onClick={() => changeQuantity(mug.id, {change: 1})}>
-                      {' '}
-                      +{' '}
+                    {mug.quantity}
+                    <span>
+                      <button
+                        type="button"
+                        onClick={() => changeQuantity(mug.id, {change: 1})}
+                      >
+                        +
+                      </button>
                     </span>
                   </div>
                   <div>
