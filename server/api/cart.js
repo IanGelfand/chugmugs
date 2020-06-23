@@ -5,12 +5,20 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     if (req.user) {
-      const cart = await req.user.getCart()
-      res.json(cart)
-    }
-    // else {
-    //   res.json(req.session.cart || [])
-    // }
+      const cartMugs = await req.user.getCart()
+
+      res.json(cartMugs)
+    } else if (!req.session.cart) res.json([])
+      else {
+        const sessionCartMugs = []
+
+        for (let mug in req.session.cart) {
+          if (req.session.cart[mug])
+            sessionCartMugs.push({...req.session.cart[mug]})
+        }
+
+        res.json(sessionCartMugs)
+      }
   } catch (error) {
     next(error)
   }
@@ -31,11 +39,14 @@ router.put('/add', async (req, res, next) => {
     }
 
     if (req.user) await req.user.addMugToCart(mug)
-    // else {
-    //   if (!req.session.cart) req.session.cart = []
+    else {
+      if (!req.session.cart) req.session.cart = {}
 
-    //   req.session.cart.push(cartMug)
-    // }
+      if (!req.session.cart[cartMug.id]) {
+        req.session.cart[cartMug.id] = {...cartMug}
+        req.session.cart[cartMug.id].quantity = 1
+      } else req.session.cart[cartMug.id].quantity++
+    }
 
     res.json(cartMug)
   } catch (error) {
@@ -51,9 +62,9 @@ router.put('/update/:mugId', async (req, res, next) => {
       })
 
       mugInCart.update({quantity: mugInCart.quantity + req.body.change})
+    } else req.session.cart[req.params.mugId].quantity += req.body.change
 
-      res.json(req.params.mugId)
-    }
+    res.json(req.params.mugId)
   } catch (error) {
     next(error)
   }
@@ -65,10 +76,9 @@ router.delete('/:mugId', async (req, res, next) => {
       const cart = await Order.findByPk(req.user.cartId)
       const mug = await Mug.findByPk(req.params.mugId)
       cart.removeMug(mug)
-      res.json(req.params.mugId)
-      // } else {
-      //   console.log('In the guest cart')
-    }
+    } else req.session.cart[req.params.mugId] = undefined
+
+    res.json(req.params.mugId)
   } catch (error) {
     console.log('Error in the delete item from cart route', error)
     next(error)
@@ -85,7 +95,9 @@ router.put('/checkout', async (req, res, next) => {
       let newCart = await Order.create({userId: req.user.id})
 
       req.user.update({cartId: newCart.id})
-    }
+    } else req.session.cart = {}
+
+    res.sendStatus(200)
   } catch (error) {
     console.log('Error in the checkout cart route', error)
     next(error)

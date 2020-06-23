@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {Mug} from '.'
-import {fetchAllMugsThunk} from '../store/all-mugs'
+import {getMugs} from '../store/mugs'
 
 class AllMugs extends Component {
   componentDidMount() {
@@ -15,26 +15,26 @@ class AllMugs extends Component {
     return mugs === undefined || !mugs.length ? (
       <h1>No Current Mug Listings</h1>
     ) : (
-      <React.Fragment>
+      <div>
         <h3>Which Mug Will You Chug?</h3>
         <div id="mug-list">
-          {mugs.map(mug => <Mug key={mug.id} {...mug} />)}
+          {mugs.map(mug => <Mug key={mug.id} mug={mug} />)}
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }
 
 const mapState = state => {
   return {
-    mugs: state.allMugs
+    mugs: state.mugs
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     loadMugs() {
-      dispatch(fetchAllMugsThunk())
+      dispatch(getMugs())
     }
   }
 }

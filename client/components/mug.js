@@ -1,11 +1,13 @@
 import React from 'react'
-import history from '../history'
+import {Link} from 'react-router-dom'
 
-const Mug = ({id, title, price, imgUrl}) => (
+const Mug = ({mug}) => (
   <div className="list-mug">
-    <h4 onClick={() => history.push(`/mugs/${id}`)}>{title}</h4>
-    <img src={imgUrl} onClick={() => history.push(`/mugs/${id}`)} />
-    <h5>Price: ${price / 100}</h5>
+    <Link to={{pathname: `/mugs/${mug.id}`, state: {...mug}}}>
+      <h4>{mug.title}</h4>
+      <img src={mug.imgUrl} />
+    </Link>
+    <h5>Price: ${mug.price / 100}</h5>
   </div>
 )
 
