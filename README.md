@@ -1,28 +1,28 @@
 # ChugMugs
 
-An E-commerce website selling Mugs developed by Fullstack Academy Students.
+An E-commerce website selling Mugs developed by Fullstack Academy senior students!
 
-Frontend - react, redux
+Frontend - React, Redux
 
-Backend - express, sequelize
+Backend - Express, Sequelize, Postgres
 
-Style - TBD
+Style - Bootstrap
 
-Deployment - Continuous deployment with travis
+Deployment - Heroku continuous deployment with Travis
 
-Deployed Link: https://chugmugs.herokuapp.com/
+Production Link: https://chugmugs.herokuapp.com/
 
-## Installing
+## Setup
 
-Cloning: git clone https://github.com/2004-team-gs-sakura/grace_shopper.git
+git clone https://github.com/2004-team-gs-sakura/chugmugs.git
 
-Getting all dependencies: npm install
+npm install
 
-Running npm run start-dev will make the app appear!
+createdb graceshopper: create postgres database
 
-Running createdb graceshopper will create our database.
+npm run start-dev: start developer environment with local server and webpack
 
-Filling database with mugs: npm run seed!
+npm run seed: seed database with mugs, users, and user carts 
 
 Visit http://localhost:8080 to start shopping on a local server.
 
