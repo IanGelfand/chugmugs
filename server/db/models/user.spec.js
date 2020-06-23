@@ -13,7 +13,7 @@ describe('User model', () => {
     describe('sets isAdmin to false', () => {
       it('sets isAdmin to false by default', async () => {
         try {
-          const user = await User.create()
+          const user = await User.create({email: 'a'})
           expect(user.isAdmin).to.be.equal(false)
         } catch (error) {
           console.error('An error occurred while creatinguser. Error: ', error)
