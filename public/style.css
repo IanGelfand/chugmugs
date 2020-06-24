@@ -86,6 +86,8 @@ form div {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  position: sticky;
+  top: 5rem;
 }
 
 /* Buttons */
