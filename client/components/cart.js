@@ -33,7 +33,7 @@ class Cart extends Component {
       <div className="cart-main">
         <h3>Your Shopping Cart</h3>
         {!totalMugs ? (
-          <h1>Your Cart Is Empty</h1>
+          <h1 id="cart-main-h1">Your Cart Is Empty</h1>
         ) : (
           <div id="cart">
             <div className="cart-total">
