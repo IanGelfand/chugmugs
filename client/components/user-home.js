@@ -17,7 +17,7 @@ export const UserHome = ({user}) => {
       ) : (
         <div id="user-page">
           <div id="user-info">
-            <h3>Welcome, {user.email}</h3>
+            <h3>Welcome, {user.firstName}</h3>
             <img src={user.imgUrl} width="400" height="400" />
           </div>
           <Cart />

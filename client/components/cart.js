@@ -68,12 +68,9 @@ class Cart extends Component {
                         <button
                           type="button"
                           className="quantity-button"
-                          onClick={() => {
-                            if (mug.quantity <= 1) removeMug(mug.id)
-                            else changeQuantity(mug.id, {change: -1})
-                          }}
+                          onClick={() => changeQuantity(mug.id, {change: 1})}
                         >
-                          -
+                          +
                         </button>
                       </div>
                       <div className="quantity-number">{mug.quantity}</div>
@@ -81,9 +78,12 @@ class Cart extends Component {
                         <button
                           type="button"
                           className="quantity-button"
-                          onClick={() => changeQuantity(mug.id, {change: 1})}
+                          onClick={() => {
+                            if (mug.quantity <= 1) removeMug(mug.id)
+                            else changeQuantity(mug.id, {change: -1})
+                          }}
                         >
-                          +
+                          -
                         </button>
                       </div>
                       <button
