@@ -10,6 +10,22 @@ body {
   );
 }
 
+#user-info,
+#cart-main-h1 {
+  margin-top: 3rem;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+/* .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+} */
+
 a {
   text-decoration: none;
   color: black;
@@ -79,7 +95,7 @@ form div {
   text-align: center;
 }
 .list-mug {
-  margin: 6rem;
+  margin: 3rem;
   box-shadow: 20px 20px 20px darkgray;
   background-color: white;
 }
@@ -154,7 +170,8 @@ form div {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 40rem;
+  width: 45rem;
+  height: 35rem;
 }
 .cart-mug img {
   padding-top: 1rem;
@@ -174,6 +191,9 @@ form div {
 .quantity-card {
   text-align: center;
   padding-right: 0;
+}
+.quantity-number {
+  font-size: 2rem;
 }
 .quantity {
   font-size: 1.5rem;

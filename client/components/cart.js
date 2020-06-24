@@ -33,7 +33,7 @@ class Cart extends Component {
       <div className="cart-main">
         <h3>Your Shopping Cart</h3>
         {!totalMugs ? (
-          <h1 id="empty">Your Cart Is Empty</h1>
+          <h1 id="cart-main-h1">Your Cart Is Empty</h1>
         ) : (
           <div id="cart">
             <div className="cart-total">
@@ -64,7 +64,7 @@ class Cart extends Component {
                   <div>
                     <div className="quantity-card">
                       <div className="quantity">Quantity </div>
-                      <span>
+                      <div>
                         <button
                           type="button"
                           className="quantity-button"
@@ -72,9 +72,9 @@ class Cart extends Component {
                         >
                           +
                         </button>
-                      </span>
-                      {mug.quantity}
-                      <span>
+                      </div>
+                      <div className="quantity-number">{mug.quantity}</div>
+                      <div>
                         <button
                           type="button"
                           className="quantity-button"
@@ -85,7 +85,7 @@ class Cart extends Component {
                         >
                           -
                         </button>
-                      </span>
+                      </div>
                       <button
                         className="remove-btn"
                         type="button"
