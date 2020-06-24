@@ -16,7 +16,7 @@ const SingleMug = ({addMugToCart, location}) => {
         <div>
           <div className="single-mug-page">
             <div className="mugImg">
-              <img src={mug.imgUrl} height="auto" width="auto" />
+              <img src={mug.imgUrl} height="500" width="auto" />
             </div>
             <div className="mugDetails">
               <h1 className="mugTitle">{mug.title}</h1>

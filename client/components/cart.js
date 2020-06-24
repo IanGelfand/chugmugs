@@ -64,7 +64,7 @@ class Cart extends Component {
                   <div>
                     <div className="quantity-card">
                       <div className="quantity">Quantity </div>
-                      <span>
+                      <div>
                         <button
                           type="button"
                           className="quantity-button"
@@ -75,9 +75,9 @@ class Cart extends Component {
                         >
                           -
                         </button>
-                      </span>
-                      {mug.quantity}
-                      <span>
+                      </div>
+                      <div className="quantity-number">{mug.quantity}</div>
+                      <div>
                         <button
                           type="button"
                           className="quantity-button"
@@ -85,7 +85,7 @@ class Cart extends Component {
                         >
                           +
                         </button>
-                      </span>
+                      </div>
                       <button
                         className="remove-btn"
                         type="button"
