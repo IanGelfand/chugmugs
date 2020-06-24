@@ -11,6 +11,7 @@ class AllMugs extends Component {
 
   render() {
     const {mugs} = this.props
+
     return mugs === undefined || !mugs.length ? (
       <h1>No Current Mug Listings</h1>
     ) : (
