@@ -107,3 +107,112 @@ form div {
   font-weight: bold;
   text-align: center;
 }
+
+/* Cart */
+
+#cart {
+  color: #535b68;
+  padding: 3rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+}
+.cart-main h3 {
+  color: #535b68;
+  font-size: 4rem;
+  font-weight: 300;
+  margin: 2rem;
+  padding-top: 2rem;
+  text-align: center;
+}
+.list-mug h4 {
+  color: #535b68;
+}
+.list-mug h5 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #1a56a0;
+}
+
+.cart-total,
+.cart-mug {
+  display: flex;
+  background-color: #dcf8f8;
+  border-radius: 7px;
+  padding: 1rem 2rem;
+  margin: 1.5rem;
+  box-shadow: 2px 4px #c7c6c6;
+}
+.cart-mug {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40rem;
+}
+.cart-mug img {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.cart-total {
+  height: 15rem;
+  width: 30rem;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: sticky;
+  top: 5rem;
+}
+
+/* Buttons */
+.quantity-card {
+  text-align: center;
+  padding-right: 0;
+}
+.quantity {
+  font-size: 1.5rem;
+  font-weight: 200;
+  padding-bottom: 1rem;
+}
+.quantity-button {
+  margin: auto 2rem;
+  font-size: 1.5rem;
+}
+.remove-btn {
+  margin-top: 6rem;
+  font-size: 1.2rem;
+}
+.checkout-btn {
+  margin-top: 2rem;
+  font-size: 2rem;
+  background-color: #1a56a0;
+  border: 2px solid #5e60ce;
+  border-radius: 0.3rem;
+  color: white;
+}
+
+.quantity-button,
+.remove-btn {
+  background-color: #5390d9;
+  border: 2px solid #5e60ce;
+  color: white;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1.2rem;
+}
+.remove-btn:hover,
+.quantity-button:hover,
+.checkout-btn:hover {
+  background-color: white;
+  border: 5px solid #5390d9;
+  color: #535b68;
+  font-weight: 800;
+}
+
+#subtotal {
+  font-size: 2rem;
+  font-weight: 200;
+}
+#total-price {
+  padding-top: 0;
+  font-size: 3rem;
+  font-weight: 500;
+}

@@ -30,59 +30,70 @@ class Cart extends Component {
       mugs.reduce((sum, mug) => sum + mug.price * mug.quantity, 0) / 100
 
     return (
-      <div>
+      <div className="cart-main">
         <h3>Your Shopping Cart</h3>
         {!totalMugs ? (
           <h1>Your Cart Is Empty</h1>
         ) : (
           <div id="cart">
-            <div id="subtotal">
-              <h5>Your Total is: ${totalPrice}</h5>
+            <div className="cart-total">
+              <div id="subtotal">
+                Your Total: <div id="total-price">${totalPrice}</div>
+              </div>
+              <div>
+                <button
+                  className="checkout-btn"
+                  type="button"
+                  onClick={() => {
+                    checkout()
+                    history.push('/checkout')
+                  }}
+                >
+                  Checkout
+                </button>
+              </div>
             </div>
-            <div>
-              <button
-                type="button"
-                onClick={() => {
-                  checkout()
-                  history.push('/checkout')
-                }}
-              >
-                Checkout
-              </button>
-            </div>
+
             <div id="cart-mugs" className="mug-list">
               {mugs.map(mug => (
                 <div key={mug.id} className="cart-mug">
-                  <Mug mug={mug} />
-                  <div className="quantity">
-                    <span>Quantity: </span>
-                    <span>
-                      <button
-                        type="button"
-                        className="quantity-button"
-                        onClick={() => {
-                          if (mug.quantity <= 1) removeMug(mug.id)
-                          else changeQuantity(mug.id, {change: -1})
-                        }}
-                      >
-                        -
-                      </button>
-                    </span>
-                    {mug.quantity}
-                    <span>
-                      <button
-                        type="button"
-                        className="quantity-button"
-                        onClick={() => changeQuantity(mug.id, {change: 1})}
-                      >
-                        +
-                      </button>
-                    </span>
-                  </div>
                   <div>
-                    <button type="button" onClick={() => removeMug(mug.id)}>
-                      Remove Mug From Cart
-                    </button>
+                    <Mug mug={mug} />
+                  </div>
+
+                  <div>
+                    <div className="quantity-card">
+                      <div className="quantity">Quantity </div>
+                      <span>
+                        <button
+                          type="button"
+                          className="quantity-button"
+                          onClick={() => {
+                            if (mug.quantity <= 1) removeMug(mug.id)
+                            else changeQuantity(mug.id, {change: -1})
+                          }}
+                        >
+                          -
+                        </button>
+                      </span>
+                      {mug.quantity}
+                      <span>
+                        <button
+                          type="button"
+                          className="quantity-button"
+                          onClick={() => changeQuantity(mug.id, {change: 1})}
+                        >
+                          +
+                        </button>
+                      </span>
+                      <button
+                        className="remove-btn"
+                        type="button"
+                        onClick={() => removeMug(mug.id)}
+                      >
+                        Remove Mug
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
