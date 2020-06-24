@@ -11,12 +11,11 @@ class AllMugs extends Component {
 
   render() {
     const {mugs} = this.props
-
     return mugs === undefined || !mugs.length ? (
       <h1>No Current Mug Listings</h1>
     ) : (
-      <div>
-        <h3>Which Mug Will You Chug?</h3>
+      <div className="allMugs">
+        <h3 className="allMugTitle">Which Mug Will You Chug?</h3>
         <div id="all-mugs" className="mug-list">
           {mugs.map(mug => <Mug key={mug.id} mug={mug} />)}
         </div>
