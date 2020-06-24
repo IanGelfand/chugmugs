@@ -1,5 +1,13 @@
 body {
   font-family: sans-serif;
+  background-image: linear-gradient(
+    to right,
+    #56cfe1,
+    #48bfe3,
+    #4ea8de,
+    #5390d9,
+    #5e60ce
+  );
 }
 
 a {
@@ -22,15 +30,80 @@ form div {
   display: inline-block;
 }
 .single-mug-page {
-  margin: 2rem;
+  display: flex;
+  margin: 1rem;
 }
-.single-mug {
+.lineBreak {
+  border-top: 1px solid #7400b8;
+  border-bottom: 1px solid #7400b8;
+  width: auto;
+  margin: 1rem;
+}
+.mugDetails {
+  flex-direction: column;
+  margin: 1rem;
+  background-color: lightblue;
+  /* background: rgb(238,174,202);
+  background: linear-gradient(to bottom right, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); */
+}
+.mugImg {
+  margin: 1rem;
+}
+.mugColor,
+.mugCapacity {
+  border: 2px solid black;
+  width: 9rem;
+  margin: 1rem;
+}
+.mugPrice {
+  margin: 1rem;
+}
+.mugTitle {
+  font-size: 65px;
+  margin-bottom: 2%;
+}
+.mugDescription,
+.mugTitle {
+  margin: 1rem;
+}
+/* .addCartButton {
+  something will go here to put add to cart button in the right place :(
+} */
+.mug-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 3rem;
+  text-align: center;
 }
-.addCartButton {
-  float: right;
+.list-mug {
+  margin: 6rem;
+  box-shadow: 20px 20px 20px darkgray;
+  background-color: white;
 }
-.left {
-  margin: 2rem;
+.allMugTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 6rem;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#7400b8, #5e60ce);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.allMugs {
+  background-image: linear-gradient(
+    to right,
+    #56cfe1,
+    #48bfe3,
+    #4ea8de,
+    #5390d9,
+    #5e60ce
+  );
+}
+.mugPrice,
+.allMugTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  text-align: center;
 }
