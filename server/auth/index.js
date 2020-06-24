@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Order = require('../db/models/order')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -27,13 +28,21 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    if (!req.body.password) {
-      res.status(400).send('Password required')
+    if (!req.body.password || !req.body.email) {
+      res.status(400).send('Password and email required')
     } else {
       const user = await User.create({
         email: req.body.email,
         password: req.body.password
       })
+
+      await Order.create({userId: user.id})
+
+      if (req.session.cart) {
+        await user.mergeGuestCart(req.session.cart)
+        req.session.cart = null
+      }
+
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {

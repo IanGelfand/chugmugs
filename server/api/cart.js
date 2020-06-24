@@ -9,16 +9,15 @@ router.get('/', async (req, res, next) => {
 
       res.json(cartMugs)
     } else if (!req.session.cart) res.json([])
-      else {
-        const sessionCartMugs = []
+    else {
+      const sessionCartMugs = []
 
-        for (let mug in req.session.cart) {
-          if (req.session.cart[mug])
-            sessionCartMugs.push({...req.session.cart[mug]})
-        }
-
-        res.json(sessionCartMugs)
+      for (let mug in req.session.cart) {
+        if (req.session.cart[mug]) sessionCartMugs.push(req.session.cart[mug])
       }
+
+      res.json(sessionCartMugs)
+    }
   } catch (error) {
     next(error)
   }
@@ -65,7 +64,7 @@ router.put('/update/:mugId', async (req, res, next) => {
         where: {orderId: cart.id, mugId: req.params.mugId}
       })
 
-      mugInCart.update({quantity: mugInCart.quantity + req.body.change})
+      await mugInCart.update({quantity: mugInCart.quantity + req.body.change})
     } else req.session.cart[req.params.mugId].quantity += req.body.change
 
     res.json(req.params.mugId)
@@ -83,7 +82,7 @@ router.delete('/:mugId', async (req, res, next) => {
 
       const mug = await Mug.findByPk(req.params.mugId)
 
-      cart.removeMug(mug)
+      await cart.removeMug(mug)
     } else req.session.cart[req.params.mugId] = null
 
     res.json(req.params.mugId)
@@ -100,7 +99,7 @@ router.put('/checkout', async (req, res, next) => {
         where: {completed: false, userId: req.user.id}
       })
 
-      cart.update({completed: true})
+      await cart.update({completed: true})
 
       await Order.create({userId: req.user.id})
     } else req.session.cart = {}

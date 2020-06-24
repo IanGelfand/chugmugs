@@ -31,9 +31,12 @@ class Routes extends Component {
         <Route path="/mugs/:mugId" component={SingleMug} />
         <Route path="/mugs" component={AllMugs} />
         <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
+        <Route
+          path="/checkout"
+          render={() => <Checkout user={this.props.user} />}
+        />
         <Route path="/home" component={UserHome} />
-        <Route component={UserHome} />
+        <Route component={GeneralHome} />
       </Switch>
     )
   }
@@ -42,6 +45,11 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
@@ -53,7 +61,7 @@ const mapDispatch = dispatch => {
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(null, mapDispatch)(Routes))
+export default withRouter(connect(mapState, mapDispatch)(Routes))
 
 /**
  * PROP TYPES

@@ -206,7 +206,6 @@ form div {
   padding: 0.5rem 1.2rem;
 }
 .remove-btn:hover,
-.quantity-button:hover,
 .checkout-btn:hover {
   background-color: white;
   border: 5px solid #5390d9;
@@ -222,4 +221,15 @@ form div {
   padding-top: 0;
   font-size: 3rem;
   font-weight: 500;
+}
+
+/* Checkout*/
+
+#checkout h1 {
+  color: #535b68;
+  font-size: 3rem;
+  font-weight: 300;
+  margin: 2rem;
+  padding-top: 2rem;
+  text-align: center;
 }
