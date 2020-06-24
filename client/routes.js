@@ -34,7 +34,7 @@ class Routes extends Component {
           render={() => <Checkout user={this.props.user} />}
         />
         <Route path="/home" component={UserHome} />
-        <Route component={UserHome} />
+        <Route component={GeneralHome} />
       </Switch>
     )
   }
