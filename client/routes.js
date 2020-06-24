@@ -12,6 +12,7 @@ import {
   Checkout
 } from './components'
 import {me} from './store/user'
+import {GeneralHome} from './components/general-home'
 
 /**
  * COMPONENT
@@ -24,6 +25,7 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/" component={GeneralHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/mugs/:mugId" component={SingleMug} />

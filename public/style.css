@@ -12,6 +12,7 @@ body {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 label {
@@ -108,7 +109,13 @@ form div {
   text-align: center;
 }
 
-/* Cart */
+#nav-bar-color {
+  background: linear-gradient(purple, turquoise);
+}
+
+.jumbo {
+  margin-bottom: 0;
+}
 
 #cart {
   color: #535b68;
