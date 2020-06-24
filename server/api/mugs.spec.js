@@ -3,8 +3,8 @@ const {expect} = require('chai')
 const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
-const agent = request.agent(app)
 const Mug = db.model('mug')
+
 describe('Mug routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
@@ -57,45 +57,6 @@ describe('Mug routes', () => {
         .expect(200)
       expect(res.body).to.be.an('array')
       expect(res.body[0].description).to.be.equal('I am a cool Mug')
-    })
-  })
-  xdescribe('GET /mugs/:id', () => {
-    let coolMug
-    beforeEach(async () => {
-      await Mug.bulkCreate([
-        {
-          title: 'Boring Mug',
-          price: 1250,
-          description: 'This Mug is boring'
-        },
-        {
-          title: 'Cool Mug',
-          price: 1250,
-          description: 'This Mug is cool'
-        },
-        {
-          title: 'Riveting Mug',
-          price: 1250,
-          description: 'This Mug is riveting'
-        }
-      ])
-    })
-    /**
-     * This is a proper GET /Mugs/ID request
-     * where we search by the ID of the Mug created above
-     */
-    it('returns the JSON of the Mug based on the id', async () => {
-      const res = await agent.get('/mugs/1').expect(200)
-      if (typeof res.body === 'string') {
-        res.body = JSON.parse(res.body)
-      }
-      expect(res.body.title).to.equal('Cool Mug')
-    })
-    /**
-     * Here we pass in a bad ID to the URL, we should get a 404 error
-     */
-    it('returns a 404 error if the ID is not correct', () => {
-      return agent.get('/Mugs/76142896').expect(404)
     })
   })
 })

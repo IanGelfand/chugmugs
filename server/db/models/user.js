@@ -83,16 +83,16 @@ User.prototype.addMugToCart = async function(mug) {
   if (!cart) {
     const newCart = await Order.create({userId: this.id})
 
-    newCart.addMug(mug, {through: {price: mug.price}})
+    await newCart.addMug(mug, {through: {price: mug.price}})
   } else {
     const mugInCart = await MugOrder.findOne({
       where: {orderId: cart.id, mugId: mug.id}
     })
 
     if (mugInCart) {
-      mugInCart.update({quantity: mugInCart.quantity + 1})
+      await mugInCart.update({quantity: mugInCart.quantity + 1})
     } else {
-      cart.addMug(mug, {through: {price: mug.price}})
+      await cart.addMug(mug, {through: {price: mug.price}})
     }
   }
 }

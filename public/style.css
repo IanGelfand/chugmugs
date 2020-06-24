@@ -143,3 +143,14 @@ form div {
   font-size: 3rem;
   font-weight: 500;
 }
+
+/* Checkout*/
+
+#checkout h1 {
+  color: #535b68;
+  font-size: 3rem;
+  font-weight: 300;
+  margin: 2rem;
+  padding-top: 2rem;
+  text-align: center;
+}

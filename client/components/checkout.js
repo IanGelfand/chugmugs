@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Checkout = props => (
+const Checkout = ({user}) => (
   <div id="checkout">
-    <h1>Wow. Such Checkout.</h1>
+    <h1>
+      Thank you for placing an order{user.id ? `, ${user.firstName}` : ''}!
+    </h1>
   </div>
 )
 
