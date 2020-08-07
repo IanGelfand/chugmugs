@@ -46,7 +46,7 @@ To use OAuth with Google, refactor the customized information with your own Goog
 
 # Authors
 
-* Barish Poole
-* Angel Concepcion
-* Ian Gelfand
-* Vasyl Semak
+* [Barish Poole](https://github.com/bpoole1989)
+* [Angel Concepcion](https://github.com/Angel-gc)
+* [Ian Gelfand](https://github.com/IanGelfand)
+* [Vasyl Semak](https://github.com/vasylsemak)
