@@ -1,9 +1,13 @@
 # ChugMugs
 
 An E-commerce website selling Mugs developed by Fullstack Academy senior students!
+
 Frontend - React, Redux
+
 Backend - Express, Sequelize, Postgres
-Style - Bootstrap
+
+Style - Bootstrap, CSS
+
 Deployment - Heroku continuous deployment with Travis
 
 ### [Production Link](https://chugmugs.herokuapp.com/)
