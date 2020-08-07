@@ -12,17 +12,16 @@ Deployment - Heroku continuous deployment with Travis
 
 Production Link: https://chugmugs.herokuapp.com/
 
-## Setup
+## Installation
 
+```bash
 git clone https://github.com/2004-team-gs-sakura/chugmugs.git
-
+cd chugmugs
 npm install
-
-createdb graceshopper: create postgres database
-
-npm run start-dev: start developer environment with local server and webpack
-
-npm run seed: seed database with mugs, users, and user carts 
+npm run seed
+createdb graceshopper
+npm run start-dev
+````
 
 Visit http://localhost:8080 to start shopping on a local server.
 
