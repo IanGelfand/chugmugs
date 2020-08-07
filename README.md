@@ -10,9 +10,7 @@ Style - [Bootstrap](https://getbootstrap.com/), CSS
 
 Deployment - Heroku continuous deployment with Travis
 
-### [Production Link](https://chugmugs.herokuapp.com/)
-
-## Demo
+## [Live Demo](https://chugmugs.herokuapp.com/)
 
 [![Image from Gyazo](https://i.gyazo.com/66573226bf14c790b58489f7fffec073.gif)](https://gyazo.com/66573226bf14c790b58489f7fffec073)
 
