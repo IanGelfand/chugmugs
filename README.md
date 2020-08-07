@@ -2,11 +2,11 @@
 
 An E-commerce website selling Mugs developed by Fullstack Academy senior students!
 
-Frontend - React, Redux
+Frontend - [React](https://reactjs.org/), [Redux](https://redux.js.org/)
 
-Backend - Express, Sequelize, Postgres
+Backend - [Express](https://expressjs.com/), [Sequelize](https://sequelize.org/), [PostgreSQL](https://www.postgresql.org/)
 
-Style - Bootstrap, CSS
+Style - [Bootstrap](https://getbootstrap.com/), CSS
 
 Deployment - Heroku continuous deployment with Travis
 
