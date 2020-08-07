@@ -36,13 +36,11 @@ If you want to run the server and/or webpack separately, you can also npm run st
 * It's very important that you not push it to Github! This information is private! Someone else may use your API keys.
 * Example of secrets.js file:
 
+```javascript
 process.env.GOOGLE_CLIENT_ID = 'Your Google Client ID here'
 process.env.GOOGLE_CLIENT_SECRET = 'Your Google Client Secret here'
 process.env.GOOGLE_CALLBACK = '/auth/google/callback'
-
-# OAuth
-
-To use OAuth with Google, refactor the customized information with your own Google Client information. You may find them from Google API dashboard.
+```
 
 # Authors
 
