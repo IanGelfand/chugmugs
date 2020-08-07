@@ -10,7 +10,7 @@ Style - Bootstrap
 
 Deployment - Heroku continuous deployment with Travis
 
-Production Link: https://chugmugs.herokuapp.com/
+### [Production Link](https://chugmugs.herokuapp.com/)
 
 ## Installation
 
